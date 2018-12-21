@@ -1,0 +1,11 @@
+version: '2'
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sundog-api-dev
+    volumes:
+     - ../../:/go/src/github.com/sundogrd/content-api
+    # environment:
+      # - GO111MODULE=on

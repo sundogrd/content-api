@@ -1,0 +1,20 @@
+{
+    "name": "App",
+    "port": 8086,
+    "db": {
+        "type": "mysql",
+        "options": {
+            "user": "sundog",
+            "password": "sundogPwd",
+            "host": "localhost",
+            "port": 3306,
+            "dbname": "sundog",
+            "connectTimeout": "10s"
+        }
+    },
+    "redis": {
+        "host": "localhost",
+        "port": 6379,
+        "password": ""
+    }
+}

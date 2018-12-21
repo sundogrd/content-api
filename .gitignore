@@ -1,0 +1,10 @@
+logs
+*.log
+.DS_Store
+.vscode
+bin
+gin-bin
+data/redis
+data/postgresql
+.idea
+.vscode

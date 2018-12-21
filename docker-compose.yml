@@ -1,0 +1,44 @@
+version: '2'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./data/mysql:/var/lib/mysql/data/mysqldata
+    ports:
+      - 3306:3306
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=example
+      - MYSQL_DATABASE=sundog
+      - MYSQL_USER=sundog
+      - MYSQL_PASSWORD=sundogPwd
+      - MYSQLDATA=/var/lib/mysql/data/mysqldata
+  redis:
+    image: redis:4-alpine
+    volumes:
+      - ./data/config/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./data/redis:/data
+    ports:
+      - 6379:6379
+    command: redis-server /usr/local/etc/redis/redis.conf
+  api:
+    build:
+      context: .
+      dockerfile: docker/development/Dockerfile
+    image: sundog-api-dev
+    command: make dev 
+    ports:
+      - 8086:8086
+    volumes:
+      - .:/go/src/github.com/sundogrd/content-api
+    depends_on:
+      - db
+      - redis
+    links:
+      - db
+      - redis
+# networks:
+  # default:
+    # Use a custom driver
+    # driver: custom-driver-1
