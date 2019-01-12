@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
+	"github.com/sundogrd/content-api/middlewares/sdsession"
 	sdUserService "github.com/sundogrd/content-api/services/user"
 	"net/http"
 
@@ -65,6 +66,8 @@ func GithubLogin(c *gin.Context) {
 
 // callback 获取github返回来的数据
 func GithubLoginCallBack(c *gin.Context) {
+	sess := sdsession.GetSession(c)
+
 	// fmt.Println("call back start")
 	callbackState := c.Query("state")
 	if callbackState != state {
@@ -93,15 +96,18 @@ func GithubLoginCallBack(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusTemporaryRedirect, gin.H{
 			"msg": "failed to get user",
+			"err": err,
 		})
 		return
 	}
 
-	existsUser := sdUserService.UserServiceInstance().FindOne(c, sdUserService.FindOneRequest{
+	var userDataInfo sdUserService.DataInfo
+
+	findOneRes := sdUserService.UserServiceInstance().FindOne(c, sdUserService.FindOneRequest{
 		Name: user.Name,
 	})
-	if existsUser == nil {
-		res, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
+	if findOneRes == nil {
+		createRes, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
 			Name:      *user.Name,
 			AvatarUrl: *user.AvatarURL,
 			Company:   *user.Company,
@@ -115,13 +121,27 @@ func GithubLoginCallBack(c *gin.Context) {
 				"msg": err,
 			})
 			c.Abort()
+		} else {
+			userDataInfo = sdUserService.DataInfo{
+				UserID: createRes.UserID,
+				Name:   createRes.Name,
+			}
 		}
-		c.JSON(201, gin.H{
-			"data": res,
-		})
 	} else {
-		c.JSON(200, gin.H{
-			"data": "exixted",
-		})
+		userDataInfo = sdUserService.DataInfo{
+			UserID: findOneRes.UserID,
+			Name:   findOneRes.Name,
+		}
 	}
+	sess.Set("user_id", userDataInfo.UserID)
+	sess.Set("user_name", userDataInfo.Name)
+	c.Redirect(http.StatusTemporaryRedirect, "")
+}
+
+func SessionTest(c *gin.Context) {
+	sess := sdsession.GetSession(c)
+	c.JSON(200, gin.H{
+		"name": sess.Get("user_name"),
+		"id":   sess.Get("user_id"),
+	})
 }

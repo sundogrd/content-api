@@ -2,15 +2,15 @@ package main
 
 import (
 	"fmt"
-	"os"
-
+	"github.com/sundogrd/content-api/middlewares/sdsession"
 	"github.com/sundogrd/content-api/utils/config"
+	"os"
 
 	"github.com/sundogrd/content-api/routes"
 
+	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/utils/db"
 	"github.com/sundogrd/content-api/utils/redis"
-	"github.com/gin-gonic/gin"
 )
 
 // CORSMiddleware ...
@@ -40,7 +40,7 @@ func main() {
 	// 初始化默认redis db, 后面在使用的时候import "github.com/ihahoo/go-api-lib/redis" 通过redis.DB(0)调用实例
 	// 如果要初始化多个redis的db，则在这里添加，比如redis.Init(1)就建立了一个db 1的连接
 	// 如果不使用redis，则删除这里以及其它和redis相关的包引入
-	err = redis.Init(1)
+	err = redis.Init(0)
 	if err != nil {
 		fmt.Printf("[Main] Init Redis error: %+v", err)
 		os.Exit(1)
@@ -57,6 +57,14 @@ func main() {
 	r := gin.Default()
 	r.HandleMethodNotAllowed = true
 	r.Use(CORSMiddleware())
+	r.Use(sdsession.Middleware(`{
+		"storeDriver":"redis",
+		"cookieName":"session_id",
+		"EnableSetCookie":true,
+		"secure":false,
+		"cookieLifeTime": 86400,
+		"Domain":""
+	}`))
 
 	routes.Routes(r)
 
