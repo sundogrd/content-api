@@ -11,9 +11,9 @@ var _contentRepositoryOnce sync.Once
 func ContentRepositoryInstance() *ContentRepository {
 	_contentRepositoryOnce.Do(func() {
 		db := dbUtils.Client
-		hasContentTable := db.HasTable(&PFContent{})
+		hasContentTable := db.HasTable(&SDContent{})
 		if hasContentTable == false {
-			db.CreateTable(&PFContent{})
+			db.CreateTable(&SDContent{})
 		}
 		_contentRepository = newContentRepository(db)
 		// &ContentRepository{

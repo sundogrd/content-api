@@ -15,8 +15,9 @@ type DataInfo struct {
 	Description string        `json:"description"`
 	AuthorID    int64         `json:"author_id"`
 	Category    string        `json:"category"`
-	Type        int16         `json:"type"`
+	Type        ContentType         `json:"type"`
 	Body        string        `json:"body"`
+	BodyType    BodyType      `json:"body_type"`
 	Version     int16         `json:"version"`
 	CreatedAt   time.Time     `json:"created_at"`
 	UpdatedAt   time.Time     `json:"updated_at"`

@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e9692f02-0fe0-4851-b52f-71b13cf7c684" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/content/content_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="580">
+              <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+              <folding>
+                <element signature="e#22#234#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/services/content/dbmodel.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="320">
+              <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+              <folding>
+                <element signature="e#17#62#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/routes/content.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/content/init.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Go File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>gor</find>
+      <find>StarNum</find>
+      <find>UnmarshalContentJson error:</find>
+      <find>golang</find>
+      <find>sqlHelper</find>
+      <find>make</find>
+      <find>total</find>
+      <find>sundog-api</find>
+      <find>t.Log</find>
+      <find>t.Logf</find>
+      <find>ctx</find>
+      <find>api</find>
+      <find>pass</find>
+      <find>aut</find>
+      <find>Type</find>
+      <find>3</find>
+      <find>PFContent</find>
+    </findStrings>
+  </component>
+  <component name="GOROOT" path="/usr/local/go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GoLibraries">
+    <option name="indexEntireGoPath" value="false" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/utils/id_builder/snow_flake.go" />
+        <option value="$PROJECT_DIR$/utils/id_builder/snow_flake_init.go" />
+        <option value="$PROJECT_DIR$/docs/sql/content.sql" />
+        <option value="$PROJECT_DIR$/services/content/util_test.go" />
+        <option value="$PROJECT_DIR$/main.go" />
+        <option value="$PROJECT_DIR$/utils/concurrent/concurrent.go" />
+        <option value="$PROJECT_DIR$/services/content/recommend/recommend.go" />
+        <option value="$PROJECT_DIR$/routes/content.go" />
+        <option value="$PROJECT_DIR$/data/config/app.json" />
+        <option value="$PROJECT_DIR$/services/content/model.go" />
+        <option value="$PROJECT_DIR$/services/content/content.go" />
+        <option value="$PROJECT_DIR$/services/content/dbmodel.go" />
+        <option value="$PROJECT_DIR$/services/content/util.go" />
+        <option value="$PROJECT_DIR$/services/content/init.go" />
+        <option value="$PROJECT_DIR$/services/content/content_test.go" />
+        <option value="$PROJECT_DIR$/handler/content.go" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="x" value="-336" />
+    <option name="y" value="-1080" />
+    <option name="width" value="1920" />
+    <option name="height" value="1080" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="content-api" type="b2602c69:ProjectViewProjectNode" />
+              <item name="content-api" type="462c0819:PsiDirectoryNode" />
+              <item name="services" type="462c0819:PsiDirectoryNode" />
+              <item name="content" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="go.vendoring.notification.had.been.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Go Test.TestContentCreate in github.com/sundogrd/content-api/services/content (1)">
+    <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="content-api" />
+      <working_directory value="$PROJECT_DIR$/services/content" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sundogrd/content-api/services/content" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestContentCreate$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestContentDelete in github.com/sundogrd/content-api/services/content" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="content-api" />
+      <working_directory value="$PROJECT_DIR$/services/content" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sundogrd/content-api/services/content" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestContentDelete$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestContentFind in github.com/sundogrd/content-api/services/content" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sundog-api" />
+      <working_directory value="$PROJECT_DIR$/services/content" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sundogrd/content-api/services/content" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestContentFind$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestContentFindOne in github.com/sundogrd/content-api/services/content" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="sundog-api" />
+      <working_directory value="$PROJECT_DIR$/services/content" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sundogrd/content-api/services/content" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestContentFindOne$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestContentRecommend in github.com/sundogrd/content-api/services/content" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="content-api" />
+      <working_directory value="$PROJECT_DIR$/services/content" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="github.com/sundogrd/content-api/services/content" />
+      <directory value="$PROJECT_DIR$/" />
+      <filePath value="$PROJECT_DIR$/" />
+      <pattern value="^TestContentRecommend$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestContentCreate in github.com/sundogrd/content-api/services/content (1)" />
+        <item itemvalue="Go Test.TestContentDelete in github.com/sundogrd/content-api/services/content" />
+        <item itemvalue="Go Test.TestContentRecommend in github.com/sundogrd/content-api/services/content" />
+        <item itemvalue="Go Test.TestContentFind in github.com/sundogrd/content-api/services/content" />
+        <item itemvalue="Go Test.TestContentFindOne in github.com/sundogrd/content-api/services/content" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 14h 44m 12s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 14h 44m 17s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentRecommend_in_github_com_sundogrd_content-api_services_content - 2019.01.12 at 14h 44m 22s.xml">
+      <configuration name="TestContentRecommend in github.com/sundogrd/content-api/services/content" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentDelete_in_github_com_sundogrd_content-api_services_content - 2019.01.12 at 15h 23m 32s.xml">
+      <configuration name="TestContentDelete in github.com/sundogrd/content-api/services/content" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 23m 48s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 25m 08s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 28m 35s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 28m 46s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 28m 49s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="TestContentCreate_in_github_com_sundogrd_content-api_services_content_(1) - 2019.01.12 at 15h 28m 55s.xml">
+      <configuration name="TestContentCreate in github.com/sundogrd/content-api/services/content (1)" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-336" y="-1080" width="1920" height="1080" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" order="0" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.17039403" />
+      <window_info id="Structure" order="2" side_tool="true" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="0" visible="true" weight="0.37128714" />
+      <window_info anchor="bottom" id="Database Changes" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="3" />
+      <window_info anchor="bottom" id="Docker" order="4" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Message" order="5" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32970297" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.35247526" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="11" />
+      <window_info anchor="right" id="Database" order="0" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="1" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VgoProject">
+    <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/utils/id_builder/snow_flake_init.go</url>
+          <line>13</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/utils/id_builder/snow_flake_init.go</url>
+          <line>18</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/services/content/content.go</url>
+          <line>240</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/services/content/content.go</url>
+          <line>245</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/services/content/content.go</url>
+          <line>304</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/services/content/content.go</url>
+          <line>277</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/services/content/content.go</url>
+          <line>150</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/vendor/modules.txt" />
+    <entry file="file://$PROJECT_DIR$/handler/hello.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/hello.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/db/db.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="45" column="23" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/id_builder/snow_flake_init.go" />
+    <entry file="file://$PROJECT_DIR$/docs/sql/content.sql" />
+    <entry file="file://$PROJECT_DIR$/services/content/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" column="9" selection-start-line="16" selection-start-column="9" selection-end-line="16" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.sum">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/jinzhu/gorm@v1.9.2/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="167" lean-forward="true" selection-start-line="167" selection-end-line="167" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/jinzhu/gorm@v1.9.2/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/builtin/builtin.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="154" column="5" selection-start-line="154" selection-start-column="5" selection-end-line="154" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/util_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/utils/concurrent/concurrent.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="17" selection-start-line="3" selection-start-column="5" selection-end-line="3" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/recommend/recommend.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="17" selection-start-column="17" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../pkg/mod/github.com/gin-gonic/gin@v1.3.0/context.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="71">
+          <caret line="300" column="18" selection-start-line="300" selection-start-column="18" selection-end-line="300" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/go.mod">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/go/src/strconv/atoi.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="155" column="5" selection-start-line="155" selection-start-column="5" selection-end-line="155" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="10" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/config/redis.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="449" column="32" selection-start-line="449" selection-start-column="12" selection-end-line="449" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/config/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="41" selection-start-line="17" selection-start-column="41" selection-end-line="17" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="48" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/dbmodel.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
+          <folding>
+            <element signature="e#17#62#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/content.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="56" column="26" selection-start-line="56" selection-start-column="26" selection-end-line="56" selection-end-column="26" />
+          <folding>
+            <element signature="e#1088#1132#0" />
+            <element signature="e#1178#1198#0" />
+            <element signature="e#1534#1638#0" />
+            <element signature="e#1674#1778#0" />
+            <element signature="e#1814#1918#0" />
+            <element signature="e#1944#2050#0" />
+            <element signature="e#2072#2123#0" />
+            <element signature="e#2152#2221#0" />
+            <element signature="e#2259#2422#0" />
+            <element signature="e#2462#2503#0" />
+            <element signature="e#4866#4886#0" />
+            <element signature="e#6515#6545#0" />
+            <element signature="n#!!block;n#Delete#0" />
+            <element signature="e#7357#7377#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/content/content_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="85" column="14" selection-start-line="85" selection-start-column="14" selection-end-line="85" selection-end-column="14" />
+          <folding>
+            <element signature="e#22#234#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/content.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="13" column="46" selection-start-line="13" selection-start-column="46" selection-end-line="13" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/handler/content.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="705">
+          <caret line="278" column="41" selection-start-line="278" selection-start-column="41" selection-end-line="278" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/util.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/user_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/init.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="41" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/model.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/dbmodel.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/user/util_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

@@ -176,7 +176,7 @@ func UpdateContent(c *gin.Context) {
 		return
 	}
 	request := content.UpdateRequest{
-		Target:      content.PFContent{ContentID: con.ContentID},
+		Target:      content.SDContent{ContentID: con.ContentID},
 		Title:       payload.Title,
 		Description: payload.Description,
 		Category:    payload.Category,
@@ -247,5 +247,36 @@ func DeleteContents(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"msg":  "Successfully deleted",
 		"data": ids,
+	})
+}
+
+type GetContentRecommendUri struct {
+	ContentID int64 `uri:"contentId" binding:"required,uuid"`
+}
+type GetContentRecommendAPIResponse struct {
+	ContentList []content.DataInfo `json:"list"`
+}
+func GetContentRecommend(c *gin.Context) {
+	ctx := context.Background()
+	contentIdStr := c.Param("contentId")
+	contentId, err := strconv.ParseInt(contentIdStr, 10, 64)
+	if err != nil {
+		c.JSON(422, gin.H{"msg": err})
+		return
+	}
+	res, err := content.ContentRepositoryInstance().GetRecommendByContent(ctx, content.GetRecommendByContentRequest{
+		ContentID: int64(contentId),
+	})
+	if err != nil {
+		c.JSON(500, gin.H{
+			"msg": err,
+		})
+		return
+	}
+	c.JSON(200, gin.H{
+		"msg":  "successfully",
+		"data": &GetContentRecommendAPIResponse{
+			ContentList: res.ContentList,
+		},
 	})
 }
