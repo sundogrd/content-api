@@ -22,7 +22,7 @@ func marshalContentExtraJson(extra *DataInfoExtra) (string, error) {
 	return string(marshaled), nil
 }
 
-func pfContentToData(dbData PFContent) DataInfo {
+func sdContentToData(dbData SDContent) DataInfo {
 	unmarshaled, err := UnmarshalContentExtraJson(dbData.Extra)
 	if err != nil {
 		unmarshaled = &DataInfoExtra{}
@@ -36,6 +36,7 @@ func pfContentToData(dbData PFContent) DataInfo {
 		Category:    dbData.Category,
 		Type:        dbData.Type,
 		Body:        dbData.Body,
+		BodyType:    dbData.BodyType,
 		Version:     dbData.Version,
 		CreatedAt:   dbData.CreatedAt,
 		UpdatedAt:   dbData.UpdatedAt,
@@ -44,17 +45,17 @@ func pfContentToData(dbData PFContent) DataInfo {
 	}
 }
 
-func pfContentsToDatas(dbData []PFContent) []DataInfo {
+func sdContentsToDatas(dbData []SDContent) []DataInfo {
 	res := make([]DataInfo, 0)
-	for _, pfContent := range dbData  {
-		res = append(res, pfContentToData(pfContent))
+	for _, sdContent := range dbData  {
+		res = append(res, sdContentToData(sdContent))
 	}
 	return res
 }
 
-func dataToPFContent(dataInfo DataInfo) PFContent {
+func dataToSDContent(dataInfo DataInfo) SDContent {
 	marshaled, _ := marshalContentExtraJson(&dataInfo.Extra)
-	return PFContent{
+	return SDContent{
 		ID:          dataInfo.ID,
 		ContentID:   dataInfo.ContentID,
 		Title:       dataInfo.Title,

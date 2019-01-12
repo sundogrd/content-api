@@ -21,6 +21,7 @@ type ContentRepositoryInterface interface {
 	Create(c context.Context, req CreateRequest) (*CreateResponse, error)
 	Delete(c context.Context, req DeleteRequest) (*DeleteResponse, error)
 	Update(c context.Context, req UpdateRequest) (*UpdateResponse, error)
+	GetRecommendByContent(c context.Context, req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error)
 }
 
 type ContentRepository struct {
@@ -46,22 +47,20 @@ type FindOneRequest struct {
 	ID        int64
 	ContentID int64
 }
-
 // FindOneResponse ...
 type FindOneResponse struct {
 	DataInfo
 }
-
 // FindOne ...
 func (cr ContentRepository) FindOne(c context.Context, req FindOneRequest) *FindOneResponse {
-	var content PFContent
-	cr.db.Where(&PFContent{
+	var content SDContent
+	cr.db.Where(&SDContent{
 		ID:        req.ID,
 		ContentID: req.ContentID,
 	}).First(&content)
 
 	res := &FindOneResponse{
-		pfContentToData(content),
+		sdContentToData(content),
 	}
 	return res
 }
@@ -89,7 +88,6 @@ type FindBaseRequest struct {
 	ContentIDs *[]int64
 	Category   *string
 }
-
 type FindPaginationRequest struct {
 	Page     *int16 // 页数从1开始，默认1
 	PageSize *int16 // 页项，默认10
@@ -114,7 +112,7 @@ type FindResponse struct {
 // Find ...
 func (cr ContentRepository) Find(c context.Context, req FindRequest) (*FindResponse, error) {
 	// var total int64 = 0
-	contents := make([]PFContent, 0)
+	contents := make([]SDContent, 0)
 
 	db := cr.db
 	// 康康参数
@@ -178,7 +176,7 @@ func (cr ContentRepository) Find(c context.Context, req FindRequest) (*FindRespo
 		}
 	}(db)
 	//go func(db *gorm.DB) {
-	//	if err := db.Find(&PFContent{}).Count(&total).Error; err != nil {
+	//	if err := db.Find(&SDContent{}).Count(&total).Error; err != nil {
 	//		errorChan <- err
 	//	}
 	//}(db)
@@ -189,7 +187,7 @@ func (cr ContentRepository) Find(c context.Context, req FindRequest) (*FindRespo
 	}
 
 	res := &FindResponse{
-		List:  pfContentsToDatas(contents),
+		List:  sdContentsToDatas(contents),
 		Total: int64(len(contents)),
 	}
 	return res, nil
@@ -225,14 +223,16 @@ func (cr ContentRepository) Create(c context.Context, req CreateRequest) (*Creat
 	}
 
 	contentId, _ := cr.idBuilder.NextId()
-	content := PFContent{
+	// TODO: contentType自动解析赋值
+	content := SDContent{
 		ContentID:   contentId,
 		Title:       req.Title,
 		Description: req.Description,
 		AuthorID:    req.AuthorID,
 		Category:    req.Category,
-		Type:        req.Type,
+		Type:        1, // 先写死只有图文
 		Body:        req.Body,
+		BodyType:    3, // 先写死为Markdown
 		Version:     req.Version,
 		Extra:       contentExtraStr,
 	}
@@ -255,8 +255,9 @@ func (cr ContentRepository) Create(c context.Context, req CreateRequest) (*Creat
 			Description: content.Description,
 			AuthorID:    content.AuthorID,
 			Category:    content.Category,
-			Type:        content.Type,
+			Type:        1, // 写死只有图文
 			Body:        content.Body,
+			BodyType:    3, // 先写死为Markdown
 			Version:     content.Version,
 			CreatedAt:   content.CreatedAt,
 			UpdatedAt:   content.UpdatedAt,
@@ -278,7 +279,7 @@ type DeleteResponse struct {
 
 // Delete ...
 func (cr ContentRepository) Delete(c context.Context, req DeleteRequest) (*DeleteResponse, error) {
-	content := &PFContent{}
+	content := &SDContent{}
 	if dbc := cr.db.Where("content_id IN (?)", req.ContentIDs).Delete(content); dbc.Error != nil {
 		fmt.Printf("[services/content] Delete: db createerror: %+v", dbc.Error)
 		// Create failed, do something e.g. return, panic etc.
@@ -287,13 +288,13 @@ func (cr ContentRepository) Delete(c context.Context, req DeleteRequest) (*Delet
 		fmt.Printf("%+v\n", dbc)
 	}
 	return &DeleteResponse{
-		DataInfo: pfContentToData(*content),
+		DataInfo: sdContentToData(*content),
 	}, nil
 }
 
 // UpdateRequest ...
 type UpdateRequest struct {
-	Target PFContent
+	Target SDContent
 
 	Title       string
 	Description string
@@ -310,7 +311,7 @@ type UpdateResponse struct {
 
 // Update ...
 func (cr ContentRepository) Update(c context.Context, req UpdateRequest) (*UpdateResponse, error) {
-	var target PFContent
+	var target SDContent
 
 	// TODO: 加上extra的update
 	cr.db.Where("content_id = ?", req.Target.ContentID).Take(&target)
@@ -327,10 +328,11 @@ func (cr ContentRepository) Update(c context.Context, req UpdateRequest) (*Updat
 		target.Category = req.Category
 		modified = true
 	}
-	if req.Type != 0 {
-		target.Type = req.Type
-		modified = true
-	}
+	// TODO: content_type自动解析赋值
+	//if req.Type != 0 {
+	//	target.Type = req.Type
+	//	modified = true
+	//}
 	if req.Body != "" {
 		target.Body = req.Body
 		modified = true
@@ -348,7 +350,26 @@ func (cr ContentRepository) Update(c context.Context, req UpdateRequest) (*Updat
 	}
 
 	return &UpdateResponse{
-		DataInfo: pfContentToData(target),
+		DataInfo: sdContentToData(target),
 	}, nil
 
+}
+
+
+type GetRecommendByContentRequest struct {
+	ContentID int64
+}
+type GetRecommendByContentResponse struct {
+	ContentList []DataInfo
+}
+func (cr ContentRepository) GetRecommendByContent(c context.Context, req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error) {
+	var recommendContents []SDContent
+	if dbc := cr.db.Limit(4).Order("updated_at desc").Find(&recommendContents); dbc.Error != nil {
+		fmt.Printf("[services/content] Update: db createerror: %+v", dbc.Error)
+		// Create failed, do something e.g. return, panic etc.
+		return nil, dbc.Error
+	}
+	return &GetRecommendByContentResponse{
+		ContentList: sdContentsToDatas(recommendContents),
+	}, nil
 }

@@ -75,7 +75,7 @@ func TestContentCreate(t *testing.T) {
 		Description: "desc",
 		AuthorID:    123,
 		Category:    "cate",
-		Type:        0,
+		Type:        1,
 		Body:        "## kekeke\n awa",
 		Version:     1,
 		Extra:       content.DataInfoExtra{},
@@ -83,7 +83,7 @@ func TestContentCreate(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(res)
+	t.Logf("CreateContent: %+v", res)
 }
 
 // TestContentDelete ...
@@ -96,12 +96,12 @@ func TestContentDelete(t *testing.T) {
 		t.Fatal(err)
 	}
 	res, err := content.ContentRepositoryInstance().Delete(ctx, content.DeleteRequest{
-		ContentID: 299696847465746432,
+		ContentIDs: []int64{299696847465746432},
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(res)
+	t.Logf("DeleteContent: %+v", res)
 }
 
 // TestContentUpdate ...
@@ -114,12 +114,31 @@ func TestContentUpdate(t *testing.T) {
 		t.Fatal(err)
 	}
 	res, err := content.ContentRepositoryInstance().Update(ctx, content.UpdateRequest{
-		Target:      content.PFContent{ContentID: 299696981532479488},
+		Target:      content.SDContent{ContentID: 299696981532479488},
 		Title:       "updateTest",
 		Description: "descUpdated",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(res)
+	t.Logf("UpdateContent: %+v", res)
 }
+
+// TestContentRecommend ...
+func TestContentRecommend(t *testing.T) {
+	var err error
+
+	ctx := context.Background()
+	err = initTestDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := content.ContentRepositoryInstance().GetRecommendByContent(ctx, content.GetRecommendByContentRequest{
+		ContentID: 299696981532479488,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("RecommendContent: %+v", res)
+}
+
