@@ -8,7 +8,7 @@ import (
 
 // Auth ...
 func Auth(r *gin.Engine) {
-	r.GET("/auth", handler.Auth)
-	r.GET("/login", handler.GithubLogin)
-	r.GET("/loginCallBack", handler.GithubLoginCallBack)
+	r.GET("/oauth2/github/auth", handler.Auth)
+	r.GET("/oauth2/github/login", handler.GithubLogin)
+	r.GET("/oauth2/github/callback", handler.GithubLoginCallBack)
 }

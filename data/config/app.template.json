@@ -1,0 +1,34 @@
+{
+  "name": "App",
+  "port": 8086,
+  "db": {
+    "type": "mysql",
+    "options": {
+      "user": "sundog",
+      "password": "sundogPwd",
+      "host": "localhost",
+      "port": 3306,
+      "dbname": "sundog",
+      "connectTimeout": "10s"
+    }
+  },
+  "redis": {
+    "host": "localhost",
+    "port": 6379,
+    "password": ""
+  },
+  "auth": {
+    "github": {
+      "endpoint": {
+        "authorizeUrl": "https://github.com/login/oauth/authorize",
+        "tokenUrl": "https://github.com/login/oauth/access_token"
+      },
+      "client": {
+        "ClientID": "Your Github ClientID",
+        "ClientSecret": "Your Github ClientSecret"
+      },
+      "scopes": ["user"],
+      "redirectUrl": "http://localhost:8086/oauth2/github/callback"
+    }
+  }
+}

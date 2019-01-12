@@ -87,18 +87,6 @@ func GithubLoginCallBack(c *gin.Context) {
 		})
 		return
 	}
-	// 试着获取用户信息
-	// response, err := http.Get("https://api.github.com/user?access_token=" + token.AccessToken)
-	// if err != nil {
-	// 	c.JSON(http.StatusTemporaryRedirect, gin.H{
-	// 		"msg": "Get info failed",
-	// 	})
-	// }
-	// defer response.Body.Close()
-	// contents, err := ioutil.ReadAll(response.Body)
-	// c.JSON(200, gin.H{
-	// 	"data": contents,
-	// })
 	client := github.NewClient(githubOauthConfig.Client(oauth2.NoContext, token))
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {

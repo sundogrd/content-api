@@ -15,7 +15,7 @@
     "redis": {
         "host": "localhost",
         "port": 6379,
-        "password": ""
+        "password": "CCq2Si39hdgY6ajP5vHL"
     },
     "auth": {
         "github": {
@@ -24,11 +24,11 @@
                 "tokenUrl": "https://github.com/login/oauth/access_token"
             },
             "client": {
-                "ClientID": "b7225e0cfe1e49e678b5",
-                "ClientSecret": "417fd5621034dfc66a54f87bf737f536eb48dc69"
+                "ClientID": "edb9625f368d4c36a837",
+                "ClientSecret": "a9b6d5a6db6383f24cad9394b01ea62272c0652c"
             },
             "scopes": ["user"],
-            "redirectUrl": "http://localhost:8086/loginCallBack"
+            "redirectUrl": "http://localhost:8086/oauth2/github/callback"
         }
     }
 }
