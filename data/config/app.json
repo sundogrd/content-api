@@ -15,6 +15,24 @@
     "redis": {
         "host": "localhost",
         "port": 6379,
+<<<<<<< HEAD
         "password": "CCq2Si39hdgY6ajP5vHL"
+=======
+        "password": ""
+    },
+    "auth": {
+        "github": {
+            "endpoint": {
+                "authorizeUrl": "https://github.com/login/oauth/authorize",
+                "tokenUrl": "https://github.com/login/oauth/access_token"
+            },
+            "client": {
+                "ClientID": "b7225e0cfe1e49e678b5",
+                "ClientSecret": "417fd5621034dfc66a54f87bf737f536eb48dc69"
+            },
+            "scopes": ["user"],
+            "redirectUrl": "http://localhost:8086/loginCallBack"
+        }
+>>>>>>> 95567240191486c8db20a742133d85aa21d4600f
     }
 }
