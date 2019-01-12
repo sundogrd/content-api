@@ -55,11 +55,10 @@ func TestContentFind(t *testing.T) {
 	}
 	res, err := content.ContentRepositoryInstance().Find(ctx, content.FindRequest{})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("FindContent err: %+v", err)
 	}
 	t.Logf("FindContents: %+v", res)
 }
-
 
 // TestContentCreate ...
 func TestContentCreate(t *testing.T) {
@@ -81,7 +80,7 @@ func TestContentCreate(t *testing.T) {
 		Extra:       content.DataInfoExtra{},
 	})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("CreateContent err: %+v", err)
 	}
 	t.Logf("CreateContent: %+v", res)
 }
@@ -119,7 +118,7 @@ func TestContentUpdate(t *testing.T) {
 		Description: "descUpdated",
 	})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("UpdateContent err: %+v", err)
 	}
 	t.Logf("UpdateContent: %+v", res)
 }
@@ -137,8 +136,7 @@ func TestContentRecommend(t *testing.T) {
 		ContentID: 299696981532479488,
 	})
 	if err != nil {
-		t.Fatal(err)
+		t.Fatalf("RecommendContent err: %+v", err)
 	}
 	t.Logf("RecommendContent: %+v", res)
 }
-

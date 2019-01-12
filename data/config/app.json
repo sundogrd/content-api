@@ -15,14 +15,7 @@
     "redis": {
         "host": "localhost",
         "port": 6379,
-<<<<<<< HEAD
         "password": "CCq2Si39hdgY6ajP5vHL"
-=======
-<<<<<<< HEAD
-        "password": "CCq2Si39hdgY6ajP5vHL"
-=======
-        "password": ""
->>>>>>> f8133cad75400a5862289a79e56b975fa1b0c956
     },
     "auth": {
         "github": {
@@ -37,6 +30,5 @@
             "scopes": ["user"],
             "redirectUrl": "http://localhost:8086/oauth2/github/callback"
         }
->>>>>>> 95567240191486c8db20a742133d85aa21d4600f
     }
 }

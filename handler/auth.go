@@ -5,6 +5,7 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
+	sdUserService "github.com/sundogrd/content-api/services/user"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -95,14 +96,32 @@ func GithubLoginCallBack(c *gin.Context) {
 		})
 		return
 	}
-	ret := User{
-		Name:     user.Name,
-		Bio:      user.Bio,
-		Company:  user.Company,
-		Url:      user.URL,
-		Location: user.Location,
-	}
-	c.JSON(200, gin.H{
-		"data": ret,
+
+	existsUser := sdUserService.UserServiceInstance().FindOne(c, sdUserService.FindOneRequest{
+		Name: user.Name,
 	})
+	if existsUser == nil {
+		res, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
+			Name:      *user.Name,
+			AvatarUrl: *user.AvatarURL,
+			Company:   *user.Company,
+			Email:     *user.Email,
+			Extra: sdUserService.DataInfoExtra{
+				GithubHome: *user.HTMLURL,
+			},
+		})
+		if err != nil {
+			c.JSON(500, gin.H{
+				"msg": err,
+			})
+			c.Abort()
+		}
+		c.JSON(201, gin.H{
+			"data": res,
+		})
+	} else {
+		c.JSON(200, gin.H{
+			"data": "exixted",
+		})
+	}
 }

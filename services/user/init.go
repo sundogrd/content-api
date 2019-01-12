@@ -5,21 +5,17 @@ import (
 	"sync"
 )
 
-var _contentRepository *ContentRepository
-var _contentRepositoryOnce sync.Once
+var _userService *UserService
+var _userServiceOnce sync.Once
 
-func ContentRepositoryInstance() *ContentRepository {
-	_contentRepositoryOnce.Do(func() {
+func UserServiceInstance() *UserService {
+	_userServiceOnce.Do(func() {
 		db := dbUtils.Client
-		hasContentTable := db.HasTable(&PFContent{})
+		hasContentTable := db.HasTable(&SDUser{})
 		if hasContentTable == false {
-			db.CreateTable(&PFContent{})
+			db.CreateTable(&SDUser{})
 		}
-		_contentRepository = newContentRepository(db)
-		// &ContentRepository{
-		// KitcClient: kitcClient,
-		// cache??
-		// }
+		_userService = newUserService(db)
 	})
-	return _contentRepository
+	return _userService
 }

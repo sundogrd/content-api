@@ -16,10 +16,6 @@ func ContentRepositoryInstance() *ContentRepository {
 			db.CreateTable(&SDContent{})
 		}
 		_contentRepository = newContentRepository(db)
-		// &ContentRepository{
-		// KitcClient: kitcClient,
-		// cache??
-		// }
 	})
 	return _contentRepository
 }

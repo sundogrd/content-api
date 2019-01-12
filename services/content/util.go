@@ -40,14 +40,13 @@ func sdContentToData(dbData SDContent) DataInfo {
 		Version:     dbData.Version,
 		CreatedAt:   dbData.CreatedAt,
 		UpdatedAt:   dbData.UpdatedAt,
-		DeletedAt:   dbData.DeletedAt,
 		Extra:       *unmarshaled,
 	}
 }
 
 func sdContentsToDatas(dbData []SDContent) []DataInfo {
 	res := make([]DataInfo, 0)
-	for _, sdContent := range dbData  {
+	for _, sdContent := range dbData {
 		res = append(res, sdContentToData(sdContent))
 	}
 	return res
@@ -67,7 +66,6 @@ func dataToSDContent(dataInfo DataInfo) SDContent {
 		Version:     dataInfo.Version,
 		CreatedAt:   dataInfo.CreatedAt,
 		UpdatedAt:   dataInfo.UpdatedAt,
-		DeletedAt:   dataInfo.DeletedAt,
 		Extra:       marshaled,
 	}
 }
