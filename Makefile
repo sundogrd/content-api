@@ -8,7 +8,7 @@ start:
 	@GIN_MODE=release ./bin/$(GONAME)
 
 build:
-	@go build -o bin/$(GONAME)
+	@export GO111MODULE=on && export GOFLAGS=-mod=vendor && go build -o bin/$(GONAME)
 
 run:
 	@./bin/$(GONAME) 

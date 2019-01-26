@@ -1,4 +1,4 @@
-# creator-service(sundogrd)
+# creator-service(sundogrd)  ![travis-build](https://api.travis-ci.org/sundogrd/content-api.svg?branch=master)
 A Go RESTful API server with gin and docker
 
 ## 安装
