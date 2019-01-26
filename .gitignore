@@ -8,3 +8,7 @@ data/redis
 data/postgresql
 .idea/
 .vscode
+
+
+content-api
+debug
