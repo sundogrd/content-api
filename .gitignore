@@ -6,5 +6,5 @@ bin
 gin-bin
 data/redis
 data/postgresql
-.idea/*
+.idea/
 .vscode
