@@ -11,5 +11,4 @@ before_install:
   -in id_rsa.enc -out ~/.ssh/id_rsa -d
 after_success:
 - chmod 600 ~/.ssh/id_rsa
-- ssh sundogrd@sundogrd.com -o StrictHostKeyChecking=no 'cd ~/content-api && make
-  build'
+- ssh sundogrd@sundogrd.com -o StrictHostKeyChecking=no 'cd ~/content-api && git pull && make build'
