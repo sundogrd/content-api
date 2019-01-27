@@ -12,3 +12,5 @@ data/postgresql
 
 content-api
 debug
+
+data/config/app.json

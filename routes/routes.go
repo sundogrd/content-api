@@ -6,6 +6,7 @@ import (
 
 // Routes ...
 func Routes(r *gin.Engine) {
+	View(r)
 	Hello(r)
 	Content(r)
 	Auth(r)
