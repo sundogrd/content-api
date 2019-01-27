@@ -57,10 +57,7 @@ func GetContent(c *gin.Context) {
 		})
 		return
 	}
-	c.JSON(200, gin.H{
-		"msg":  "successfully",
-		"data": res,
-	})
+	c.JSON(200, res)
 }
 
 func getLists(c *gin.Context) (*content.FindResponse, error) {
@@ -256,6 +253,7 @@ type GetContentRecommendUri struct {
 type GetContentRecommendAPIResponse struct {
 	ContentList []content.DataInfo `json:"list"`
 }
+
 func GetContentRecommend(c *gin.Context) {
 	ctx := context.Background()
 	contentIdStr := c.Param("contentId")
@@ -274,7 +272,7 @@ func GetContentRecommend(c *gin.Context) {
 		return
 	}
 	c.JSON(200, gin.H{
-		"msg":  "successfully",
+		"msg": "successfully",
 		"data": &GetContentRecommendAPIResponse{
 			ContentList: res.ContentList,
 		},

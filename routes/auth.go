@@ -12,4 +12,5 @@ func Auth(r *gin.Engine) {
 	r.GET("/oauth2/github/login", handler.GithubLogin)
 	r.GET("/oauth2/github/callback", handler.GithubLoginCallBack)
 	r.GET("/sessions/test", handler.SessionTest)
+	r.GET("/i", handler.I)
 }

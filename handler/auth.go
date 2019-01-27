@@ -5,12 +5,12 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"fmt"
+	"github.com/google/go-github/github"
 	"github.com/sundogrd/content-api/middlewares/sdsession"
 	sdUserService "github.com/sundogrd/content-api/services/user"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/google/go-github/github"
 	"github.com/sundogrd/content-api/utils/config"
 	"golang.org/x/oauth2"
 )
@@ -72,7 +72,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	callbackState := c.Query("state")
 	if callbackState != state {
 		fmt.Printf("invalid oauth state, expected '%s', got '%s'\n", state, callbackState)
-		c.Redirect(http.StatusTemporaryRedirect, "/")
+		c.Redirect(http.StatusTemporaryRedirect, "http://lwio.sundogrd.com")
 		return
 	}
 	fmt.Println(state)
@@ -82,7 +82,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	// fmt.Println(token)
 	if err != nil {
 		fmt.Printf("Code exchange failed with '%s'\n", err)
-		c.Redirect(http.StatusTemporaryRedirect, "/")
+		c.Redirect(http.StatusTemporaryRedirect, "http://lwio.sundogrd.com")
 		return
 	}
 	if !token.Valid() {
@@ -135,10 +135,19 @@ func GithubLoginCallBack(c *gin.Context) {
 	}
 	sess.Set("user_id", userDataInfo.UserID)
 	sess.Set("user_name", userDataInfo.Name)
-	c.Redirect(http.StatusTemporaryRedirect, "")
+	c.Redirect(http.StatusTemporaryRedirect, "http://lwio.sundogrd.com")
+	return
 }
 
 func SessionTest(c *gin.Context) {
+	sess := sdsession.GetSession(c)
+	c.JSON(200, gin.H{
+		"name": sess.Get("user_name"),
+		"id":   sess.Get("user_id"),
+	})
+}
+
+func I(c *gin.Context) {
 	sess := sdsession.GetSession(c)
 	c.JSON(200, gin.H{
 		"name": sess.Get("user_name"),
