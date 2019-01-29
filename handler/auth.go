@@ -75,11 +75,8 @@ func GithubLoginCallBack(c *gin.Context) {
 		c.Redirect(http.StatusTemporaryRedirect, "http://lwio.sundogrd.com")
 		return
 	}
-	fmt.Println(state)
 	code := c.Query("code")
-	// fmt.Println(code)
 	token, err := githubOauthConfig.Exchange(oauth2.NoContext, code)
-	// fmt.Println(token)
 	if err != nil {
 		fmt.Printf("Code exchange failed with '%s'\n", err)
 		c.Redirect(http.StatusTemporaryRedirect, "http://lwio.sundogrd.com")
@@ -87,7 +84,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	}
 	if !token.Valid() {
 		c.JSON(http.StatusTemporaryRedirect, gin.H{
-			"msg": "retreived invalid token",
+			"msg": "retreived invalid github token",
 		})
 		return
 	}
@@ -95,7 +92,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	user, _, err := client.Users.Get(context.Background(), "")
 	if err != nil {
 		c.JSON(http.StatusTemporaryRedirect, gin.H{
-			"msg": "failed to get user",
+			"msg": "failed to get github user",
 			"err": err,
 		})
 		return
@@ -106,6 +103,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	findOneRes := sdUserService.UserServiceInstance().FindOne(c, sdUserService.FindOneRequest{
 		Name: user.Name,
 	})
+	fmt.Printf("findOneRes: %+v", findOneRes)
 	if findOneRes == nil {
 		createRes, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
 			Name:      *user.Name,

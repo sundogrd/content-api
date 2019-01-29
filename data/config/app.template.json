@@ -1,6 +1,7 @@
 {
   "name": "App",
   "port": 8086,
+  "home_page": "http://lwio.sundogrd.com",
   "db": {
     "type": "mysql",
     "options": {
