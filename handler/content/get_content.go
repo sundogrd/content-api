@@ -1,11 +1,15 @@
 package content
 
 import (
-	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/services/content"
+	"net/http"
 	"strconv"
 )
+
+type GetContentResponse struct {
+	content.ContentInfo
+}
 
 func GetContent(c *gin.Context) {
 	contentId := c.Param("contentId")
@@ -13,25 +17,18 @@ func GetContent(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	res := content.ContentRepositoryInstance().FindOne(content.FindOneRequest{ContentID: id})
-	if res.ID == 0 {
-		c.JSON(404, gin.H{
-			"msg": err,
-		})
-		return
-	}
-	c.JSON(200, res)
-}
-
-// GetContent ...
-func GetContent(c *gin.Context) {
-	contentId := c.Param("contentId")
-	res, err := getContentById(contentId)
+	res, err := content.ContentServiceInstance().FindOne(content.FindOneRequest{ContentID: id})
 	if err != nil {
-		c.JSON(404, gin.H{
+		c.JSON(http.StatusNotFound, gin.H{
 			"msg": err,
 		})
 		return
 	}
-	c.JSON(200, res)
+	if res.ContentID == 0 {
+		c.JSON(http.StatusNotFound, gin.H{
+			"msg": "ContentID: " + contentId + " Not Found",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, res)
 }

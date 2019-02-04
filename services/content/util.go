@@ -28,7 +28,6 @@ func packContentInfo(dbData SDContent) ContentInfo {
 		unmarshaledExtra = &ContentInfoExtra{}
 	}
 	return ContentInfo{
-		ID:          dbData.ID,
 		ContentID:   dbData.ContentID,
 		Title:       dbData.Title,
 		Description: dbData.Description,

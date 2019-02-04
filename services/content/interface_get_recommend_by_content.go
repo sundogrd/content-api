@@ -12,7 +12,7 @@ type GetRecommendByContentResponse struct {
 func (cr ContentService) GetRecommendByContent(req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error) {
 	var recommendContents []SDContent
 	if dbc := cr.db.Limit(4).Order("updated_at desc").Find(&recommendContents); dbc.Error != nil {
-		fmt.Printf("[services/content] Update: db createerror: %+v", dbc.Error)
+		fmt.Printf("[services/content] GetRecommendByContent: db error: %+v", dbc.Error)
 		// Create failed, do something e.g. return, panic etc.
 		return nil, dbc.Error
 	}

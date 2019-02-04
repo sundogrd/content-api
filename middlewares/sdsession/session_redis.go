@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/go-redis/redis"
 	redisUtil "github.com/sundogrd/content-api/utils/redis"
+	"strings"
 	"sync"
 	"time"
 )
@@ -48,7 +49,8 @@ func (r *redisStore) Set(k string, v interface{}, sid string) error {
 	r.redis.Set(Redis_Prefix+sid, redisstring, Redis_life)
 	return nil
 }
-func (r *redisStore) getSessionData(sid string) (jsondata map[string]interface{}, err error) {
+func (r *redisStore) getSessionData(sid string) (map[string]interface{}, error) {
+	var jsondata map[string]interface{}
 	if r.redis == nil {
 		fmt.Println("redis == nil")
 		r.initRedisConn()
@@ -60,10 +62,17 @@ func (r *redisStore) getSessionData(sid string) (jsondata map[string]interface{}
 		return nil, err
 	}
 
-	if err := json.Unmarshal([]byte(data), &jsondata); err != nil {
-		fmt.Println(err)
-		return nil, err
+	d := json.NewDecoder(strings.NewReader(data))
+	d.UseNumber()
+	if err := d.Decode(&jsondata); err != nil {
+		fmt.Errorf("[middlewares/sdsession] getSessionData decode error: &+v", err)
+		return jsondata, err
 	}
+	//if err := json.Unmarshal([]byte(data), &jsondata); err != nil {
+	//	fmt.Println(err)
+	//	return nil, err
+	//}
+	fmt.Printf("getSessionData %+v\n", jsondata)
 	return jsondata, nil
 }
 func (r *redisStore) initRedisConn() {

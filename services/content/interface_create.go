@@ -8,9 +8,8 @@ type CreateRequest struct {
 	Description string
 	AuthorID    int64
 	Category    string
-	Type        int16
+	Type        ContentType
 	Body        string
-	Version     int16
 	Extra       ContentInfoExtra
 }
 
@@ -33,6 +32,7 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 
 	contentId, _ := cr.idBuilder.NextId()
 	// TODO: contentType自动解析赋值
+
 	content := SDContent{
 		ContentID:   contentId,
 		Title:       req.Title,
@@ -42,7 +42,7 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 		Type:        1, // 先写死只有图文
 		Body:        req.Body,
 		BodyType:    3, // 先写死为Markdown
-		Version:     req.Version,
+		Version:     1,
 		Extra:       contentExtraStr,
 	}
 	if dbc := cr.db.Create(&content); dbc.Error != nil {
@@ -58,7 +58,6 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 	}
 	res := &CreateResponse{
 		ContentInfo: ContentInfo{
-			ID:          content.ID,
 			ContentID:   content.ContentID,
 			Title:       content.Title,
 			Description: content.Description,

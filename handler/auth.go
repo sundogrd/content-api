@@ -39,7 +39,7 @@ var githubOauthConfig *oauth2.Config
 // auth github test...
 func Auth(c *gin.Context) {
 	c.Header("Content-Type", "text/html; charset=utf-8")
-	c.String(200, htmlIndex)
+	c.String(http.StatusOK, htmlIndex)
 }
 
 /*github oauth2*/

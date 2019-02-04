@@ -80,7 +80,7 @@ func TestUserDelete(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := content.ContentRepositoryInstance().Delete(ctx, content.DeleteRequest{
+	res, err := content.ContentServiceInstance().Delete(content.DeleteRequest{
 		ContentIDs: []int64{299696847465746432},
 	})
 	if err != nil {

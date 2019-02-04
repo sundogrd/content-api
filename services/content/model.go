@@ -9,7 +9,6 @@ type ContentInfoExtra struct {
 }
 
 type ContentInfo struct {
-	ID          int64            `json:"id"`
 	ContentID   int64            `json:"content_id"`
 	Title       string           `json:"title"`
 	Description string           `json:"description"`
