@@ -8,6 +8,7 @@ import (
 	"github.com/sundogrd/content-api/services/user"
 	"github.com/sundogrd/content-api/utils/config"
 	"github.com/sundogrd/content-api/utils/db"
+	"github.com/sundogrd/content-api/utils/pointer"
 	"testing"
 )
 
@@ -58,8 +59,8 @@ func TestUserCreate(t *testing.T) {
 	res, err := user.UserServiceInstance().Create(ctx, user.CreateRequest{
 		Name:      "LWio",
 		AvatarUrl: "https://avatars1.githubusercontent.com/u/9214496?v=4",
-		Company:   "Bytedance",
-		Email:     "liang.peare@gmail.com",
+		Company:   pointer.String("Bytedance"),
+		Email:     pointer.String("liang.peare@gmail.com"),
 		Extra: user.DataInfoExtra{
 			GithubHome: "https://github.com/lwyj123",
 		},
