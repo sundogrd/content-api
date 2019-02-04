@@ -70,8 +70,8 @@ func (cr UserService) FindOne(c context.Context, req FindOneRequest) *FindOneRes
 type CreateRequest struct {
 	Name      string
 	AvatarUrl string
-	Company   string
-	Email     string
+	Company   *string
+	Email     *string
 	Extra     DataInfoExtra
 }
 

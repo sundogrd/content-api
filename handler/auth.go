@@ -108,8 +108,8 @@ func GithubLoginCallBack(c *gin.Context) {
 		createRes, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
 			Name:      *user.Name,
 			AvatarUrl: *user.AvatarURL,
-			Company:   *user.Company,
-			Email:     *user.Email,
+			Company:   user.Company,
+			Email:     user.Email,
 			Extra: sdUserService.DataInfoExtra{
 				GithubHome: *user.HTMLURL,
 			},

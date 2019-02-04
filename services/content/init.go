@@ -5,17 +5,17 @@ import (
 	"sync"
 )
 
-var _contentRepository *ContentRepository
-var _contentRepositoryOnce sync.Once
+var _contentService *ContentService
+var _contentServiceOnce sync.Once
 
-func ContentRepositoryInstance() *ContentRepository {
-	_contentRepositoryOnce.Do(func() {
+func ContentServiceInstance() *ContentService {
+	_contentServiceOnce.Do(func() {
 		db := dbUtils.Client
 		hasContentTable := db.HasTable(&SDContent{})
 		if hasContentTable == false {
 			db.CreateTable(&SDContent{})
 		}
-		_contentRepository = newContentRepository(db)
+		_contentService = newContentService(db)
 	})
-	return _contentRepository
+	return _contentService
 }

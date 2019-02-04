@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 )
 
-func UnmarshalContentExtraJson(jsonStr string) (*DataInfoExtra, error) {
+func unmarshalContentExtraJson(jsonStr string) (*ContentInfoExtra, error) {
 	var jsonBlob = []byte(jsonStr)
-	var extra DataInfoExtra
+	var extra ContentInfoExtra
 	err := json.Unmarshal(jsonBlob, &extra)
 	if err != nil {
 		return nil, err
@@ -14,7 +14,7 @@ func UnmarshalContentExtraJson(jsonStr string) (*DataInfoExtra, error) {
 	return &extra, nil
 }
 
-func marshalContentExtraJson(extra *DataInfoExtra) (string, error) {
+func marshalContentExtraJson(extra *ContentInfoExtra) (string, error) {
 	marshaled, err := json.Marshal(extra)
 	if err != nil {
 		return "{}", err
@@ -22,12 +22,12 @@ func marshalContentExtraJson(extra *DataInfoExtra) (string, error) {
 	return string(marshaled), nil
 }
 
-func sdContentToData(dbData SDContent) DataInfo {
-	unmarshaled, err := UnmarshalContentExtraJson(dbData.Extra)
+func packContentInfo(dbData SDContent) ContentInfo {
+	unmarshaledExtra, err := unmarshalContentExtraJson(dbData.Extra)
 	if err != nil {
-		unmarshaled = &DataInfoExtra{}
+		unmarshaledExtra = &ContentInfoExtra{}
 	}
-	return DataInfo{
+	return ContentInfo{
 		ID:          dbData.ID,
 		ContentID:   dbData.ContentID,
 		Title:       dbData.Title,
@@ -40,32 +40,6 @@ func sdContentToData(dbData SDContent) DataInfo {
 		Version:     dbData.Version,
 		CreatedAt:   dbData.CreatedAt,
 		UpdatedAt:   dbData.UpdatedAt,
-		Extra:       *unmarshaled,
-	}
-}
-
-func sdContentsToDatas(dbData []SDContent) []DataInfo {
-	res := make([]DataInfo, 0)
-	for _, sdContent := range dbData {
-		res = append(res, sdContentToData(sdContent))
-	}
-	return res
-}
-
-func dataToSDContent(dataInfo DataInfo) SDContent {
-	marshaled, _ := marshalContentExtraJson(&dataInfo.Extra)
-	return SDContent{
-		ID:          dataInfo.ID,
-		ContentID:   dataInfo.ContentID,
-		Title:       dataInfo.Title,
-		Description: dataInfo.Description,
-		AuthorID:    dataInfo.AuthorID,
-		Category:    dataInfo.Category,
-		Type:        dataInfo.Type,
-		Body:        dataInfo.Body,
-		Version:     dataInfo.Version,
-		CreatedAt:   dataInfo.CreatedAt,
-		UpdatedAt:   dataInfo.UpdatedAt,
-		Extra:       marshaled,
+		Extra:       *unmarshaledExtra,
 	}
 }

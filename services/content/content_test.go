@@ -2,7 +2,6 @@ package content_test
 
 import (
 	"bytes"
-	"context"
 	"testing"
 
 	"github.com/spf13/viper"
@@ -28,48 +27,22 @@ func initTestDB() error {
 			}
 	  	}
 	}`)
-	viper.ReadConfig(bytes.NewBuffer(jsonConfig))
-	_, err := db.Init()
+	err := viper.ReadConfig(bytes.NewBuffer(jsonConfig))
+	if err != nil {
+		return err
+	}
+	_, err = db.Init()
 	return err
 }
 
-// TestContentFindOne ...
-func TestContentFindOne(t *testing.T) {
-	ctx := context.Background()
-	err := initTestDB()
-	if err != nil {
-		t.Fatal(err)
-	}
-	res := content.ContentRepositoryInstance().FindOne(ctx, content.FindOneRequest{
-		ContentID: 300746136048635904,
-	})
-	t.Logf("FindContent: %+v", res)
-}
-
-// TestContentFind ...
-func TestContentFind(t *testing.T) {
-	ctx := context.Background()
-	err := initTestDB()
-	if err != nil {
-		t.Fatal(err)
-	}
-	res, err := content.ContentRepositoryInstance().Find(ctx, content.FindRequest{})
-	if err != nil {
-		t.Fatalf("FindContent err: %+v", err)
-	}
-	t.Logf("FindContents: %+v", res)
-}
-
-// TestContentCreate ...
-func TestContentCreate(t *testing.T) {
+func TestContentService_Create(t *testing.T) {
 	var err error
 
-	ctx := context.Background()
 	err = initTestDB()
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := content.ContentRepositoryInstance().Create(ctx, content.CreateRequest{
+	res, err := content.ContentServiceInstance().Create(content.CreateRequest{
 		Title:       "test",
 		Description: "desc",
 		AuthorID:    123,
@@ -77,7 +50,7 @@ func TestContentCreate(t *testing.T) {
 		Type:        1,
 		Body:        "## kekeke\n awa",
 		Version:     1,
-		Extra:       content.DataInfoExtra{},
+		Extra:       content.ContentInfoExtra{},
 	})
 	if err != nil {
 		t.Fatalf("CreateContent err: %+v", err)
@@ -85,17 +58,15 @@ func TestContentCreate(t *testing.T) {
 	t.Logf("CreateContent: %+v", res)
 }
 
-// TestContentDelete ...
-func TestContentDelete(t *testing.T) {
+func TestContentService_Delete(t *testing.T) {
 	var err error
 
-	ctx := context.Background()
 	err = initTestDB()
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := content.ContentRepositoryInstance().Delete(ctx, content.DeleteRequest{
-		ContentIDs: []int64{299696847465746432},
+	res, err := content.ContentServiceInstance().Delete(content.DeleteRequest{
+		ContentIDs: []int64{303983183500677120},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -103,17 +74,55 @@ func TestContentDelete(t *testing.T) {
 	t.Logf("DeleteContent: %+v", res)
 }
 
-// TestContentUpdate ...
-func TestContentUpdate(t *testing.T) {
-	var err error
+func TestContentService_Find(t *testing.T) {
+	err := initTestDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := content.ContentServiceInstance().Find(content.FindRequest{})
+	if err != nil {
+		t.Fatalf("FindContent err: %+v", err)
+	}
+	t.Logf("FindContents: %+v", res)
+}
+func TestContentService_FindOne(t *testing.T) {
+	err := initTestDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := content.ContentServiceInstance().FindOne(content.FindOneRequest{
+		ContentID: 303983137602408448,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("FindContent: %+v", res)
+}
 
-	ctx := context.Background()
+func TestContentService_GetRecommendByContent(t *testing.T) {
+	var err error
 	err = initTestDB()
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := content.ContentRepositoryInstance().Update(ctx, content.UpdateRequest{
-		Target:      content.SDContent{ContentID: 299696981532479488},
+	res, err := content.ContentServiceInstance().GetRecommendByContent(content.GetRecommendByContentRequest{
+		ContentID: 299696981532479488,
+	})
+	if err != nil {
+		t.Fatalf("RecommendContent err: %+v", err)
+	}
+	t.Logf("RecommendContent: %+v", res)
+}
+
+func TestContentService_Update(t *testing.T) {
+	var err error
+
+	err = initTestDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := content.ContentServiceInstance().Update(content.UpdateRequest{
+		Target:      content.SDContent{ContentID: 303983196138115072},
 		Title:       "updateTest",
 		Description: "descUpdated",
 	})
@@ -121,22 +130,4 @@ func TestContentUpdate(t *testing.T) {
 		t.Fatalf("UpdateContent err: %+v", err)
 	}
 	t.Logf("UpdateContent: %+v", res)
-}
-
-// TestContentRecommend ...
-func TestContentRecommend(t *testing.T) {
-	var err error
-
-	ctx := context.Background()
-	err = initTestDB()
-	if err != nil {
-		t.Fatal(err)
-	}
-	res, err := content.ContentRepositoryInstance().GetRecommendByContent(ctx, content.GetRecommendByContentRequest{
-		ContentID: 299696981532479488,
-	})
-	if err != nil {
-		t.Fatalf("RecommendContent err: %+v", err)
-	}
-	t.Logf("RecommendContent: %+v", res)
 }
