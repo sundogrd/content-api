@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"github.com/google/go-github/github"
 	"github.com/sundogrd/content-api/middlewares/sdsession"
-	sdUserService "github.com/sundogrd/content-api/services/user"
+	userService "github.com/sundogrd/content-api/services/user"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -98,35 +98,34 @@ func GithubLoginCallBack(c *gin.Context) {
 		return
 	}
 
-	var userDataInfo sdUserService.DataInfo
+	var userDataInfo userService.UserInfo
 
-	findOneRes := sdUserService.UserServiceInstance().FindOne(c, sdUserService.FindOneRequest{
+	findOneRes := userService.UserServiceInstance().FindOne(userService.FindOneRequest{
 		Name: user.Name,
 	})
-	fmt.Printf("findOneRes: %+v", findOneRes)
 	if findOneRes == nil {
-		createRes, err := sdUserService.UserServiceInstance().Create(c, sdUserService.CreateRequest{
+		createRes, err := userService.UserServiceInstance().Create(userService.CreateRequest{
 			Name:      *user.Name,
 			AvatarUrl: *user.AvatarURL,
 			Company:   user.Company,
 			Email:     user.Email,
-			Extra: sdUserService.DataInfoExtra{
+			Extra: userService.UserInfoExtra{
 				GithubHome: *user.HTMLURL,
 			},
 		})
 		if err != nil {
-			c.JSON(500, gin.H{
+			c.JSON(http.StatusInternalServerError, gin.H{
 				"msg": err,
 			})
-			c.Abort()
+			return
 		} else {
-			userDataInfo = sdUserService.DataInfo{
+			userDataInfo = userService.UserInfo{
 				UserID: createRes.UserID,
 				Name:   createRes.Name,
 			}
 		}
 	} else {
-		userDataInfo = sdUserService.DataInfo{
+		userDataInfo = userService.UserInfo{
 			UserID: findOneRes.UserID,
 			Name:   findOneRes.Name,
 		}

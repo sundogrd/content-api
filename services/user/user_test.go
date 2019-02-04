@@ -2,9 +2,7 @@ package user_test
 
 import (
 	"bytes"
-	"context"
 	"github.com/spf13/viper"
-	"github.com/sundogrd/content-api/services/content"
 	"github.com/sundogrd/content-api/services/user"
 	"github.com/sundogrd/content-api/utils/config"
 	"github.com/sundogrd/content-api/utils/db"
@@ -34,57 +32,50 @@ func initTestDB() error {
 	return err
 }
 
-// TestUserFindOne ...
-func TestUserFindOne(t *testing.T) {
-	ctx := context.Background()
-	err := initTestDB()
-	if err != nil {
-		t.Fatal(err)
-	}
-	res := user.UserServiceInstance().FindOne(ctx, user.FindOneRequest{
-		UserID: 304008154235023360,
-	})
-	t.Logf("FindContent: %+v", res)
-}
-
-// TestUserCreate ...
-func TestUserCreate(t *testing.T) {
+func TestUserService_Create(t *testing.T) {
 	var err error
 
-	ctx := context.Background()
 	err = initTestDB()
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := user.UserServiceInstance().Create(ctx, user.CreateRequest{
+	res, err := user.UserServiceInstance().Create(user.CreateRequest{
 		Name:      "LWio",
 		AvatarUrl: "https://avatars1.githubusercontent.com/u/9214496?v=4",
 		Company:   pointer.String("Bytedance"),
 		Email:     pointer.String("liang.peare@gmail.com"),
-		Extra: user.DataInfoExtra{
+		Extra: user.UserInfoExtra{
 			GithubHome: "https://github.com/lwyj123",
 		},
 	})
 	if err != nil {
 		t.Fatalf("CreateContent err: %+v", err)
 	}
-	t.Logf("CreateContent: %+v", res)
+	t.Logf("[User] Create: %+v", res)
 }
 
-// TestUserDelete ...
-func TestUserDelete(t *testing.T) {
+func TestUserService_Delete(t *testing.T) {
 	var err error
 
-	ctx := context.Background()
 	err = initTestDB()
 	if err != nil {
 		t.Fatal(err)
 	}
-	res, err := content.ContentServiceInstance().Delete(content.DeleteRequest{
-		ContentIDs: []int64{299696847465746432},
+	res, err := user.UserServiceInstance().Delete(user.DeleteRequest{
+		UserID: 312461704938139648,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("DeleteContent: %+v", res)
+	t.Logf("[User] Delete: %+v", res)
+}
+func TestUserService_FindOne(t *testing.T) {
+	err := initTestDB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	res := user.UserServiceInstance().FindOne(user.FindOneRequest{
+		UserID: pointer.Int64(312337740408565760),
+	})
+	t.Logf("[User] FindOne: %+v", res)
 }
