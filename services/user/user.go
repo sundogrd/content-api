@@ -9,7 +9,7 @@ import (
 )
 
 type UserServiceInterface interface {
-	FindOne(req FindOneRequest) *FindOneResponse
+	FindOne(req FindOneRequest) (*FindOneResponse, error)
 	Create(req CreateRequest) (*CreateResponse, error)
 	Delete(req DeleteRequest) (*DeleteResponse, error)
 }

@@ -12,14 +12,14 @@ type FindOneResponse struct {
 }
 
 // FindOne ...
-func (cr UserService) FindOne(req FindOneRequest) *FindOneResponse {
+func (us UserService) FindOne(req FindOneRequest) (*FindOneResponse, error) {
 	var user SDUser
 	if req.UserID != nil {
-		cr.db.Where(&SDUser{
+		us.db.Where(&SDUser{
 			UserID: *req.UserID,
 		}).First(&user)
 	} else if req.Name != nil {
-		cr.db.Where(&SDUser{
+		us.db.Where(&SDUser{
 			Name: *req.Name,
 		}).First(&user)
 	}
@@ -28,7 +28,7 @@ func (cr UserService) FindOne(req FindOneRequest) *FindOneResponse {
 		packUserInfo(user),
 	}
 	if res.UserID == 0 {
-		return nil
+		return nil, nil
 	}
-	return res
+	return res, nil
 }

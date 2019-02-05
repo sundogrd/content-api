@@ -100,7 +100,7 @@ func GithubLoginCallBack(c *gin.Context) {
 
 	var userDataInfo userService.UserInfo
 
-	findOneRes := userService.UserServiceInstance().FindOne(userService.FindOneRequest{
+	findOneRes, err := userService.UserServiceInstance().FindOne(userService.FindOneRequest{
 		Name: user.Name,
 	})
 	if findOneRes == nil {
