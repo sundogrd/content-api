@@ -17,7 +17,7 @@ type CreateContentRequest struct {
 	BodyType content.BodyType    `json:"body_type"`
 }
 type CreateContentResponse struct {
-	content.ContentInfo
+	content.BaseInfo
 	ContentID string `json:"content_id"`
 	AuthorID  string `json:"author_id"`
 }
@@ -52,7 +52,7 @@ func CreateContent(c *gin.Context) {
 		Category:    "",
 		Type:        request.Type,
 		Body:        request.Body,
-		Extra:       content.ContentInfoExtra{},
+		Extra:       content.BaseInfoExtra{},
 	})
 	if err != nil {
 		log.Fatalln(err)
@@ -62,7 +62,7 @@ func CreateContent(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, CreateContentResponse{
-		ContentInfo: res.ContentInfo,
+		BaseInfo: res.BaseInfo,
 		ContentID:   strconv.FormatInt(res.ContentID, 10),
 		AuthorID:    strconv.FormatInt(res.AuthorID, 10),
 	})

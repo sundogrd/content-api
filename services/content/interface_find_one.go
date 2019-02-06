@@ -8,7 +8,7 @@ type FindOneRequest struct {
 
 // FindOneResponse ...
 type FindOneResponse struct {
-	ContentInfo
+	BaseInfo
 }
 
 // FindOne ...
@@ -20,7 +20,7 @@ func (cs ContentService) FindOne(req FindOneRequest) (*FindOneResponse, error) {
 	}).First(&content)
 
 	res := &FindOneResponse{
-		packContentInfo(content),
+		packBaseInfo(content),
 	}
 	return res, nil
 }

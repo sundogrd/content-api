@@ -9,7 +9,7 @@ import (
 )
 
 type GetContentResponse struct {
-	user.UserInfo
+	user.BaseInfo
 }
 
 func GetContent(c *gin.Context) {

@@ -6,7 +6,7 @@ type GetRecommendByContentRequest struct {
 	ContentID int64
 }
 type GetRecommendByContentResponse struct {
-	ContentList []ContentInfo
+	ContentList []BaseInfo
 }
 
 func (cr ContentService) GetRecommendByContent(req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error) {
@@ -16,11 +16,11 @@ func (cr ContentService) GetRecommendByContent(req GetRecommendByContentRequest)
 		// Create failed, do something e.g. return, panic etc.
 		return nil, dbc.Error
 	}
-	contentInfos := make([]ContentInfo, 0)
+	BaseInfos := make([]BaseInfo, 0)
 	for _, v := range recommendContents {
-		contentInfos = append(contentInfos, packContentInfo(v))
+		BaseInfos = append(BaseInfos, packBaseInfo(v))
 	}
 	return &GetRecommendByContentResponse{
-		ContentList: contentInfos,
+		ContentList: BaseInfos,
 	}, nil
 }

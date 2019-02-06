@@ -12,7 +12,7 @@ type FindRequest struct {
 
 // FindResponse ...
 type FindResponse struct {
-	List  []ContentInfo
+	List  []BaseInfo
 	Total int64
 }
 
@@ -47,12 +47,12 @@ func (cs ContentService) Find(req FindRequest) (*FindResponse, error) {
 	if err := db.Find(&contents).Offset(0).Limit(-1).Count(&count).Error; err != nil {
 		return nil, err
 	} else {
-		contentInfos := make([]ContentInfo, 0)
+		BaseInfos := make([]BaseInfo, 0)
 		for _, v := range contents {
-			contentInfos = append(contentInfos, packContentInfo(v))
+			BaseInfos = append(BaseInfos, packBaseInfo(v))
 		}
 		res := &FindResponse{
-			List:  contentInfos,
+			List:  BaseInfos,
 			Total: count,
 		}
 		return res, nil

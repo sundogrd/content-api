@@ -17,7 +17,7 @@ type ListContentRequest struct {
 	PageSize   *int16               `form:"page_size" json:"page_size"`
 }
 type ListContentResponse struct {
-	List  []content.ContentInfo `json:"list"`
+	List  []content.BaseInfo `json:"list"`
 	Total int64                 `json:"total"`
 }
 

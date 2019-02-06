@@ -2,9 +2,9 @@ package user
 
 import "encoding/json"
 
-func unmarshalUserExtraJson(jsonStr string) (*UserInfoExtra, error) {
+func unmarshalUserExtraJson(jsonStr string) (*BaseInfoExtra, error) {
 	var jsonBlob = []byte(jsonStr)
-	var extra UserInfoExtra
+	var extra BaseInfoExtra
 	err := json.Unmarshal(jsonBlob, &extra)
 	if err != nil {
 		return nil, err
@@ -12,7 +12,7 @@ func unmarshalUserExtraJson(jsonStr string) (*UserInfoExtra, error) {
 	return &extra, nil
 }
 
-func marshalUserExtraJson(extra *UserInfoExtra) (string, error) {
+func marshalUserExtraJson(extra *BaseInfoExtra) (string, error) {
 	marshaled, err := json.Marshal(extra)
 	if err != nil {
 		return "{}", err
@@ -20,15 +20,15 @@ func marshalUserExtraJson(extra *UserInfoExtra) (string, error) {
 	return string(marshaled), nil
 }
 
-func packUserInfo(dbData SDUser) UserInfo {
+func packBaseInfo(dbData SDUser) BaseInfo {
 	unmarshaledExtra, err := unmarshalUserExtraJson(dbData.Extra)
 	if err != nil {
-		unmarshaledExtra = &UserInfoExtra{}
+		unmarshaledExtra = &BaseInfoExtra{}
 	}
-	return UserInfo{
+	return BaseInfo{
 		UserID:    dbData.UserID,
 		Name:      dbData.Name,
-		AvatarUrl: dbData.AvatarUrl,
+		AvatarURL: dbData.AvatarURL,
 		Company:   dbData.Company,
 		Email:     dbData.Email,
 		CreatedAt: dbData.CreatedAt,

@@ -11,7 +11,7 @@ type GetContentRecommendUri struct {
 	ContentID int64 `uri:"contentId" binding:"required,uuid"`
 }
 type GetContentRecommendAPIResponse struct {
-	List []content.ContentInfo `json:"list"`
+	List []content.BaseInfo `json:"list"`
 	//Total int64                 `json:"total"`
 }
 

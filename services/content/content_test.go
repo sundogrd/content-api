@@ -50,7 +50,7 @@ func TestContentService_Create(t *testing.T) {
 		Type:        1,
 		Body:        "## kekeke\n awa",
 		Version:     1,
-		Extra:       content.ContentInfoExtra{},
+		Extra:       content.BaseInfoExtra{},
 	})
 	if err != nil {
 		t.Fatalf("CreateContent err: %+v", err)

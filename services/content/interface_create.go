@@ -10,12 +10,12 @@ type CreateRequest struct {
 	Category    string
 	Type        ContentType
 	Body        string
-	Extra       ContentInfoExtra
+	Extra       BaseInfoExtra
 }
 
 // CreateResponse ...
 type CreateResponse struct {
-	ContentInfo
+	BaseInfo
 }
 
 // Create ...
@@ -27,7 +27,7 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 	contentExtraStr, err := marshalContentExtraJson(&req.Extra)
 	if err != nil {
 		fmt.Printf("[services/content] Create: json marshal error: %+v", err)
-		contentExtraStr, _ = marshalContentExtraJson(&ContentInfoExtra{})
+		contentExtraStr, _ = marshalContentExtraJson(&BaseInfoExtra{})
 	}
 
 	contentId, _ := cr.idBuilder.NextId()
@@ -54,10 +54,10 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 	responseExtra, err := unmarshalContentExtraJson(content.Extra)
 	if err != nil {
 		fmt.Printf("[services/content] Create: UnmarshalContentJson error: %+v", err)
-		responseExtra = &ContentInfoExtra{}
+		responseExtra = &BaseInfoExtra{}
 	}
 	res := &CreateResponse{
-		ContentInfo: ContentInfo{
+		BaseInfo: BaseInfo{
 			ContentID:   content.ContentID,
 			Title:       content.Title,
 			Description: content.Description,

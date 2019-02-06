@@ -19,7 +19,7 @@ type UpdateRequest struct {
 
 // UpdateResponse ...
 type UpdateResponse struct {
-	ContentInfo
+	BaseInfo
 }
 
 // Update ...
@@ -63,7 +63,7 @@ func (cr ContentService) Update(req UpdateRequest) (*UpdateResponse, error) {
 	}
 
 	return &UpdateResponse{
-		ContentInfo: packContentInfo(target),
+		BaseInfo: packBaseInfo(target),
 	}, nil
 
 }

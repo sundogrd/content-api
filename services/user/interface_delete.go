@@ -9,7 +9,7 @@ type DeleteRequest struct {
 
 // DeleteResponse ...
 type DeleteResponse struct {
-	UserInfo
+	BaseInfo
 }
 
 // Delete ...
@@ -19,9 +19,8 @@ func (us UserService) Delete(req DeleteRequest) (*DeleteResponse, error) {
 		fmt.Printf("[services/user] Delete: db createerror: %+v", dbc.Error)
 		// Create failed, do something e.g. return, panic etc.
 		return nil, dbc.Error
-	} else {
-		return &DeleteResponse{
-			UserInfo: packUserInfo(user),
-		}, nil
 	}
+	return &DeleteResponse{
+		BaseInfo: packBaseInfo(user),
+	}, nil
 }

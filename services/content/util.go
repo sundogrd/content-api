@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 )
 
-func unmarshalContentExtraJson(jsonStr string) (*ContentInfoExtra, error) {
+func unmarshalContentExtraJson(jsonStr string) (*BaseInfoExtra, error) {
 	var jsonBlob = []byte(jsonStr)
-	var extra ContentInfoExtra
+	var extra BaseInfoExtra
 	err := json.Unmarshal(jsonBlob, &extra)
 	if err != nil {
 		return nil, err
@@ -14,7 +14,7 @@ func unmarshalContentExtraJson(jsonStr string) (*ContentInfoExtra, error) {
 	return &extra, nil
 }
 
-func marshalContentExtraJson(extra *ContentInfoExtra) (string, error) {
+func marshalContentExtraJson(extra *BaseInfoExtra) (string, error) {
 	marshaled, err := json.Marshal(extra)
 	if err != nil {
 		return "{}", err
@@ -22,12 +22,12 @@ func marshalContentExtraJson(extra *ContentInfoExtra) (string, error) {
 	return string(marshaled), nil
 }
 
-func packContentInfo(dbData SDContent) ContentInfo {
+func packBaseInfo(dbData SDContent) BaseInfo {
 	unmarshaledExtra, err := unmarshalContentExtraJson(dbData.Extra)
 	if err != nil {
-		unmarshaledExtra = &ContentInfoExtra{}
+		unmarshaledExtra = &BaseInfoExtra{}
 	}
-	return ContentInfo{
+	return BaseInfo{
 		ContentID:   dbData.ContentID,
 		Title:       dbData.Title,
 		Description: dbData.Description,

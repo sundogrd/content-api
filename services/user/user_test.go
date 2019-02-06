@@ -44,7 +44,7 @@ func TestUserService_Create(t *testing.T) {
 		AvatarUrl: "https://avatars1.githubusercontent.com/u/9214496?v=4",
 		Company:   pointer.String("Bytedance"),
 		Email:     pointer.String("liang.peare@gmail.com"),
-		Extra: user.UserInfoExtra{
+		Extra: user.BaseInfoExtra{
 			GithubHome: "https://github.com/lwyj123",
 		},
 	})
@@ -74,8 +74,11 @@ func TestUserService_FindOne(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	res := user.UserServiceInstance().FindOne(user.FindOneRequest{
+	res, err := user.UserServiceInstance().FindOne(user.FindOneRequest{
 		UserID: pointer.Int64(312337740408565760),
 	})
+	if err != nil {
+		t.Fatal(err)
+	}
 	t.Logf("[User] FindOne: %+v", res)
 }

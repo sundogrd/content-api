@@ -4,11 +4,11 @@ import (
 	"time"
 )
 
-type ContentInfoExtra struct {
+type BaseInfoExtra struct {
 	StarNum int64 `json:"star_num"`
 }
 
-type ContentInfo struct {
+type BaseInfo struct {
 	ContentID   int64            `json:"content_id"`
 	Title       string           `json:"title"`
 	Description string           `json:"description"`
@@ -20,5 +20,5 @@ type ContentInfo struct {
 	Version     int16            `json:"version"`
 	CreatedAt   time.Time        `json:"created_at"`
 	UpdatedAt   time.Time        `json:"updated_at"`
-	Extra       ContentInfoExtra `json:"extra"`
+	Extra       BaseInfoExtra `json:"extra"`
 }

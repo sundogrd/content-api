@@ -5,15 +5,15 @@ import "fmt"
 // CreateRequest ...
 type CreateRequest struct {
 	Name      string
-	AvatarUrl string
+	AvatarURL string
 	Company   *string
 	Email     *string
-	Extra     UserInfoExtra
+	Extra     BaseInfoExtra
 }
 
 // CreateResponse ...
 type CreateResponse struct {
-	UserInfo
+	BaseInfo
 }
 
 // Create ...
@@ -25,14 +25,14 @@ func (us UserService) Create(req CreateRequest) (*CreateResponse, error) {
 	userExtraStr, err := marshalUserExtraJson(&req.Extra)
 	if err != nil {
 		fmt.Printf("[services/user] Create: json marshal error: %+v", err)
-		userExtraStr, _ = marshalUserExtraJson(&UserInfoExtra{})
+		userExtraStr, _ = marshalUserExtraJson(&BaseInfoExtra{})
 	}
 
-	userId, _ := us.idBuilder.NextId()
+	userID, _ := us.idBuilder.NextId()
 	user := SDUser{
-		UserID:    userId,
+		UserID:    userID,
 		Name:      req.Name,
-		AvatarUrl: req.AvatarUrl,
+		AvatarURL: req.AvatarURL,
 		Company:   req.Company,
 		Email:     req.Email,
 		Extra:     userExtraStr,
@@ -46,13 +46,13 @@ func (us UserService) Create(req CreateRequest) (*CreateResponse, error) {
 	responseExtra, err := unmarshalUserExtraJson(user.Extra)
 	if err != nil {
 		fmt.Printf("[services/user] Create: UnmarshalUserExtraJson error: %+v", err)
-		responseExtra = &UserInfoExtra{}
+		responseExtra = &BaseInfoExtra{}
 	}
 	res := &CreateResponse{
-		UserInfo: UserInfo{
+		BaseInfo: BaseInfo{
 			UserID:    user.UserID,
 			Name:      user.Name,
-			AvatarUrl: user.AvatarUrl,
+			AvatarURL: user.AvatarURL,
 			Company:   user.Company,
 			Email:     user.Email,
 			CreatedAt: user.CreatedAt,

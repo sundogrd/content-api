@@ -15,11 +15,12 @@ import (
 	"golang.org/x/oauth2"
 )
 
+// User ...
 type User struct {
 	Name     *string
 	Bio      *string
 	Location *string
-	Url      *string
+	URL      *string
 	Company  *string
 }
 
@@ -36,13 +37,13 @@ func getGitHubConfig(name string) string {
 
 var githubOauthConfig *oauth2.Config
 
-// auth github test...
+// Auth github test...
 func Auth(c *gin.Context) {
 	c.Header("Content-Type", "text/html; charset=utf-8")
 	c.String(http.StatusOK, htmlIndex)
 }
 
-/*github oauth2*/
+// GithubLogin ...
 func GithubLogin(c *gin.Context) {
 	b := make([]byte, 16)
 	rand.Read(b)
@@ -64,7 +65,7 @@ func GithubLogin(c *gin.Context) {
 	c.Redirect(http.StatusTemporaryRedirect, url)
 }
 
-// callback 获取github返回来的数据
+// GithubLoginCallBack 获取github返回来的数据
 func GithubLoginCallBack(c *gin.Context) {
 	sess := sdsession.GetSession(c)
 
@@ -98,7 +99,7 @@ func GithubLoginCallBack(c *gin.Context) {
 		return
 	}
 
-	var userDataInfo userService.UserInfo
+	var userDataInfo userService.BaseInfo
 
 	findOneRes, err := userService.UserServiceInstance().FindOne(userService.FindOneRequest{
 		Name: user.Name,
@@ -106,10 +107,10 @@ func GithubLoginCallBack(c *gin.Context) {
 	if findOneRes == nil {
 		createRes, err := userService.UserServiceInstance().Create(userService.CreateRequest{
 			Name:      *user.Name,
-			AvatarUrl: *user.AvatarURL,
+			AvatarURL: *user.AvatarURL,
 			Company:   user.Company,
 			Email:     user.Email,
-			Extra: userService.UserInfoExtra{
+			Extra: userService.BaseInfoExtra{
 				GithubHome: *user.HTMLURL,
 			},
 		})
@@ -118,14 +119,13 @@ func GithubLoginCallBack(c *gin.Context) {
 				"msg": err,
 			})
 			return
-		} else {
-			userDataInfo = userService.UserInfo{
-				UserID: createRes.UserID,
-				Name:   createRes.Name,
-			}
+		}
+		userDataInfo = userService.BaseInfo{
+			UserID: createRes.UserID,
+			Name:   createRes.Name,
 		}
 	} else {
-		userDataInfo = userService.UserInfo{
+		userDataInfo = userService.BaseInfo{
 			UserID: findOneRes.UserID,
 			Name:   findOneRes.Name,
 		}
@@ -136,6 +136,7 @@ func GithubLoginCallBack(c *gin.Context) {
 	return
 }
 
+// SessionTest ...
 func SessionTest(c *gin.Context) {
 	sess := sdsession.GetSession(c)
 	c.JSON(200, gin.H{
@@ -144,6 +145,7 @@ func SessionTest(c *gin.Context) {
 	})
 }
 
+// I ...
 func I(c *gin.Context) {
 	sess := sdsession.GetSession(c)
 	c.JSON(200, gin.H{

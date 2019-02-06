@@ -8,7 +8,7 @@ type FindOneRequest struct {
 
 // FindOneResponse ...
 type FindOneResponse struct {
-	UserInfo
+	BaseInfo
 }
 
 // FindOne ...
@@ -25,7 +25,7 @@ func (us UserService) FindOne(req FindOneRequest) (*FindOneResponse, error) {
 	}
 
 	res := &FindOneResponse{
-		packUserInfo(user),
+		packBaseInfo(user),
 	}
 	if res.UserID == 0 {
 		return nil, nil

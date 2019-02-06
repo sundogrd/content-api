@@ -10,16 +10,19 @@ import (
 	"time"
 )
 
+// GetContentResponseAuthor ...
 type GetContentResponseAuthor struct {
 	UserID    string             `json:"user_id"`
 	Name      string             `json:"name"`
-	AvatarUrl string             `json:"avatar_url"`
+	AvatarURL string             `json:"avatar_url"`
 	Company   *string            `json:"company"`
 	Email     *string            `json:"email"`
 	CreatedAt time.Time          `json:"created_at"`
 	UpdatedAt time.Time          `json:"updated_at"`
-	Extra     user.UserInfoExtra `json:"extra"`
+	Extra     user.BaseInfoExtra `json:"extra"`
 }
+
+// GetContentResponse ...
 type GetContentResponse struct {
 	ContentID   string                   `json:"content_id"`
 	Title       string                   `json:"title"`
@@ -32,12 +35,13 @@ type GetContentResponse struct {
 	Version     int16                    `json:"version"`
 	CreatedAt   time.Time                `json:"created_at"`
 	UpdatedAt   time.Time                `json:"updated_at"`
-	Extra       content.ContentInfoExtra `json:"extra"`
+	Extra       content.BaseInfoExtra `json:"extra"`
 }
 
+// GetContent ...
 func GetContent(c *gin.Context) {
-	contentId := c.Param("contentId")
-	id, err := strconv.ParseInt(contentId, 10, 64)
+	contentID := c.Param("contentId")
+	id, err := strconv.ParseInt(contentID, 10, 64)
 	if err != nil {
 		panic(err)
 	}
@@ -50,7 +54,7 @@ func GetContent(c *gin.Context) {
 	}
 	if contentFindOneRes.ContentID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
-			"msg": "ContentID: " + contentId + " Not Found",
+			"msg": "ContentID: " + contentID + " Not Found",
 		})
 		return
 	}
@@ -70,7 +74,7 @@ func GetContent(c *gin.Context) {
 		Author: GetContentResponseAuthor{
 			UserID:    strconv.FormatInt(userFindOneRes.UserID, 10),
 			Name:      userFindOneRes.Name,
-			AvatarUrl: userFindOneRes.AvatarUrl,
+			AvatarURL: userFindOneRes.AvatarURL,
 			Company:   userFindOneRes.Company,
 			Email:     userFindOneRes.Email,
 			CreatedAt: userFindOneRes.CreatedAt,

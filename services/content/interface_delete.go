@@ -9,7 +9,7 @@ type DeleteRequest struct {
 
 // DeleteResponse ...
 type DeleteResponse struct {
-	ContentInfo
+	BaseInfo
 }
 
 // Delete ...
@@ -21,7 +21,7 @@ func (cr ContentService) Delete(req DeleteRequest) (*DeleteResponse, error) {
 		return nil, dbc.Error
 	} else {
 		return &DeleteResponse{
-			ContentInfo: packContentInfo(*content),
+			BaseInfo: packBaseInfo(*content),
 		}, nil
 	}
 
