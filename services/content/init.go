@@ -14,6 +14,8 @@ func ContentServiceInstance() *ContentService {
 		hasContentTable := db.HasTable(&SDContent{})
 		if hasContentTable == false {
 			db.CreateTable(&SDContent{})
+		} else {
+			db.AutoMigrate(&SDContent{})
 		}
 		_contentService = newContentService(db)
 	})

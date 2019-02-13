@@ -3,7 +3,7 @@ package db
 import (
 	"github.com/sundogrd/content-api/utils/config"
 	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mysql" // ...
 )
 
 // Client 默认数据库实例
@@ -38,6 +38,7 @@ func Connect(prePath string) (*gorm.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+	db.Set("gorm:table_options", "ENGINE=InnoDB CHARSET=utf8mb4")
 	// if config.Get
 	db.LogMode(true)
 	return db, nil
