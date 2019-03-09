@@ -14,6 +14,7 @@ type ContentServiceInterface interface {
 	Create(req CreateRequest) (*CreateResponse, error)
 	Delete(req DeleteRequest) (*DeleteResponse, error)
 	Update(req UpdateRequest) (*UpdateResponse, error)
+	Read(req ReadRequest) (*ReadResponse, error)
 	GetRecommendByContent(req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error)
 }
 

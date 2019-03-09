@@ -6,21 +6,25 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+//BodyType ...
 type BodyType int16
 
+// ...
 const (
-	BODY_TYPE_TEXT     BodyType = 1
-	BODY_TYPE_HTML     BodyType = 2
-	BODY_TYPE_MARKDOWN BodyType = 3
-	BODY_TYPE_LATEX    BodyType = 4
+	BodyTypeText     BodyType = 1
+	BodyTypeHTML     BodyType = 2
+	BodyTypeMarkdown BodyType = 3
+	BodyTypeLatex    BodyType = 4
 )
 
+// ContentType ...
 type ContentType int16
 
+// ...
 const (
-	CONTENT_TYPE_TEXT  ContentType = 1
-	CONTENT_TYPE_AUDIO ContentType = 2
-	CONTENT_TYPE_VIDEO ContentType = 4
+	TypeText  ContentType = 1
+	TypeAudio ContentType = 2
+	TypeVideo ContentType = 4
 )
 
 // SDContent http://gorm.io/docs/models.html
@@ -42,7 +46,31 @@ type SDContent struct {
 	Extra       string      `gorm:"type:TEXT;"`
 }
 
+func (SDContent) TableName() string {
+	return "sd_contents"
+}
+
+
+// SDContentAudit ...
 type SDContentAudit struct {
 	gorm.Model
 	ID int64 `gorm:"AUTO_INCREMENT;NOT NULL"`
 }
+func (SDContentAudit) TableName() string {
+	return "sd_content_audits"
+}
+
+
+// SDContentCount ...
+type SDContentCount struct {
+	ID         int64  `gorm:"primary_key;AUTO_INCREMENT;not null"`
+	ContentID  int64  `gorm:"not null;"`
+	CountKey   string `gorm:"type:varchar(60);not null"`
+	CountValue int64  `gorm:"type:bigint;not null"`
+}
+func (SDContentCount) TableName() string {
+	return "sd_content_counts"
+}
+
+
+

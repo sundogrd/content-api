@@ -1,6 +1,7 @@
 package content
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/services/content"
 	"github.com/sundogrd/content-api/services/user"
@@ -35,7 +36,7 @@ type GetContentResponse struct {
 	Version     int16                    `json:"version"`
 	CreatedAt   time.Time                `json:"created_at"`
 	UpdatedAt   time.Time                `json:"updated_at"`
-	Extra       content.BaseInfoExtra `json:"extra"`
+	Extra       content.FullInfoExtra    `json:"extra"`
 }
 
 // GetContent ...
@@ -57,6 +58,12 @@ func GetContent(c *gin.Context) {
 			"msg": "ContentID: " + contentID + " Not Found",
 		})
 		return
+	}
+	_, err = content.ContentServiceInstance().Read(content.ReadRequest{
+		ContentID: id,
+	})
+	if err != nil {
+		fmt.Errorf("read %d error", id)
 	}
 	userFindOneRes, err := user.UserServiceInstance().FindOne(user.FindOneRequest{
 		UserID: pointer.Int64(contentFindOneRes.AuthorID),

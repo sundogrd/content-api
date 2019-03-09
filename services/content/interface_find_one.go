@@ -8,19 +8,24 @@ type FindOneRequest struct {
 
 // FindOneResponse ...
 type FindOneResponse struct {
-	BaseInfo
+	FullInfo
 }
 
 // FindOne ...
 func (cs ContentService) FindOne(req FindOneRequest) (*FindOneResponse, error) {
 	var content SDContent
+	var contentCount SDContentCount
 	cs.db.Where(&SDContent{
 		ID:        req.ID,
 		ContentID: req.ContentID,
 	}).First(&content)
+	cs.db.Where(&SDContentCount{
+		ContentID: req.ContentID,
+		CountKey: "read_count",
+	}).First(&contentCount)
 
 	res := &FindOneResponse{
-		packBaseInfo(content),
+		packFullInfo(content, contentCount),
 	}
 	return res, nil
 }
