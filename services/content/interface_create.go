@@ -8,6 +8,7 @@ type CreateRequest struct {
 	Description string
 	AuthorID    int64
 	Category    string
+	Status      *ContentStatus
 	Type        ContentType
 	Body        string
 	Extra       BaseInfoExtra
@@ -33,12 +34,22 @@ func (cr ContentService) Create(req CreateRequest) (*CreateResponse, error) {
 	contentId, _ := cr.idBuilder.NextId()
 	// TODO: contentType自动解析赋值
 
+	// 支持通过Status创建，默认为Published
+	var contentStatus ContentStatus
+	if req.Status != nil {
+		contentStatus = *req.Status
+	} else {
+		contentStatus = ContentStatusPublished
+	}
+
+
 	content := SDContent{
 		ContentID:   contentId,
 		Title:       req.Title,
 		Description: req.Description,
 		AuthorID:    req.AuthorID,
 		Category:    req.Category,
+		Status:      contentStatus,
 		Type:        1, // 先写死只有图文
 		Body:        req.Body,
 		BodyType:    3, // 先写死为Markdown

@@ -9,16 +9,17 @@ import (
 )
 
 type ListContentRequest struct {
-	Title      *string              `form:"title" json:"title"`
-	Type       *content.ContentType `form:"type" json:"type"`
-	AuthorID   *int64               `form:"author_id" json:"author_id"`
-	ContentIDs []int64              `form:"content_ids" json:"content_ids"`
-	Page       *int16               `form:"page" json:"page"`
-	PageSize   *int16               `form:"page_size" json:"page_size"`
+	Title      *string                `form:"title" json:"title"`
+	Type       *content.ContentType   `form:"type" json:"type"`
+	AuthorID   *int64                 `form:"author_id" json:"author_id"`
+	Status     *content.ContentStatus `form:"status" json:"status"`
+	ContentIDs []int64                `form:"content_ids" json:"content_ids"`
+	Page       *int16                 `form:"page" json:"page"`
+	PageSize   *int16                 `form:"page_size" json:"page_size"`
 }
 type ListContentResponse struct {
 	List  []content.BaseInfo `json:"list"`
-	Total int64                 `json:"total"`
+	Total int64              `json:"total"`
 }
 
 // ListContent ...
@@ -36,6 +37,9 @@ func ListContent(c *gin.Context) {
 
 	if request.Title != nil {
 		findReq.Title = request.Title
+	}
+	if request.Status != nil {
+		findReq.Status = request.Status
 	}
 	if request.AuthorID != nil {
 		findReq.AuthorID = request.AuthorID

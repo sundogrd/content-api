@@ -34,6 +34,7 @@ func packBaseInfo(dbData SDContent) BaseInfo {
 		AuthorID:    dbData.AuthorID,
 		Category:    dbData.Category,
 		Type:        dbData.Type,
+		Status:      dbData.Status,
 		Body:        dbData.Body,
 		BodyType:    dbData.BodyType,
 		Version:     dbData.Version,
@@ -42,7 +43,6 @@ func packBaseInfo(dbData SDContent) BaseInfo {
 		Extra:       *unmarshaledExtra,
 	}
 }
-
 
 func unmarshalFullExtraJson(jsonStr string) (*FullInfoExtra, error) {
 	var jsonBlob = []byte(jsonStr)
@@ -70,6 +70,7 @@ func packFullInfo(dbData SDContent, countData SDContentCount) FullInfo {
 		AuthorID:    dbData.AuthorID,
 		Category:    dbData.Category,
 		Type:        dbData.Type,
+		Status:      dbData.Status,
 		Body:        dbData.Body,
 		BodyType:    dbData.BodyType,
 		Version:     dbData.Version,
@@ -78,4 +79,3 @@ func packFullInfo(dbData SDContent, countData SDContentCount) FullInfo {
 		Extra:       *unmarshaledExtra,
 	}
 }
-

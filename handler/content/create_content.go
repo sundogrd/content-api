@@ -11,10 +11,11 @@ import (
 )
 
 type CreateContentRequest struct {
-	Title    string              `json:"title"`
-	Type     content.ContentType `json:"type"`
-	Body     string              `json:"body"`
-	BodyType content.BodyType    `json:"body_type"`
+	Title    string                 `json:"title"`
+	Type     content.ContentType    `json:"type"`
+	Status   *content.ContentStatus `json:"status"`
+	Body     string                 `json:"body"`
+	BodyType content.BodyType       `json:"body_type"`
 }
 type CreateContentResponse struct {
 	content.BaseInfo
@@ -50,6 +51,7 @@ func CreateContent(c *gin.Context) {
 		Description: "",
 		AuthorID:    authorID,
 		Category:    "",
+		Status:      request.Status,
 		Type:        request.Type,
 		Body:        request.Body,
 		Extra:       content.BaseInfoExtra{},
@@ -62,8 +64,8 @@ func CreateContent(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, CreateContentResponse{
-		BaseInfo: res.BaseInfo,
-		ContentID:   strconv.FormatInt(res.ContentID, 10),
-		AuthorID:    strconv.FormatInt(res.AuthorID, 10),
+		BaseInfo:  res.BaseInfo,
+		ContentID: strconv.FormatInt(res.ContentID, 10),
+		AuthorID:  strconv.FormatInt(res.AuthorID, 10),
 	})
 }

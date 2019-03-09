@@ -15,6 +15,7 @@ type BaseInfo struct {
 	AuthorID    int64         `json:"author_id"`
 	Category    string        `json:"category"`
 	Type        ContentType   `json:"type"`
+	Status      ContentStatus `json:"status"`
 	Body        string        `json:"body"`
 	BodyType    BodyType      `json:"body_type"`
 	Version     int16         `json:"version"`
@@ -34,6 +35,7 @@ type FullInfo struct {
 	AuthorID    int64             `json:"author_id"`
 	Category    string            `json:"category"`
 	Type        ContentType       `json:"type"`
+	Status      ContentStatus `json:"status"`
 	Body        string            `json:"body"`
 	BodyType    BodyType          `json:"body_type"`
 	Version     int16             `json:"version"`

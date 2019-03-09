@@ -5,6 +5,7 @@ type FindRequest struct {
 	ContentIDs *[]int64
 	Title      *string
 	AuthorID   *int64
+	Status     *ContentStatus
 	Type       *ContentType // content类型
 	Page       *int16       // 页数从1开始，默认1
 	PageSize   *int16       // 页项，默认10
@@ -42,6 +43,9 @@ func (cs ContentService) Find(req FindRequest) (*FindResponse, error) {
 	}
 	if req.Type != nil {
 		db = db.Where("type = ?", *req.Type)
+	}
+	if req.Status != nil {
+		db = db.Where("status = ?", *req.Status)
 	}
 	db.Limit(pageSize).Offset((page - 1) * (pageSize))
 	if err := db.Find(&contents).Offset(0).Limit(-1).Count(&count).Error; err != nil {

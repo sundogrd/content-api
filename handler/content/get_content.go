@@ -31,6 +31,7 @@ type GetContentResponse struct {
 	Author      GetContentResponseAuthor `json:"author"`
 	Category    string                   `json:"category"`
 	Type        content.ContentType      `json:"type"`
+	Status      content.ContentStatus    `json:"status"`
 	Body        string                   `json:"body"`
 	BodyType    content.BodyType         `json:"body_type"`
 	Version     int16                    `json:"version"`
@@ -89,6 +90,7 @@ func GetContent(c *gin.Context) {
 			Extra:     userFindOneRes.Extra,
 		},
 		Category:  contentFindOneRes.Category,
+		Status:    contentFindOneRes.Status,
 		Type:      contentFindOneRes.Type,
 		Body:      contentFindOneRes.Body,
 		BodyType:  contentFindOneRes.BodyType,
