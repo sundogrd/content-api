@@ -2,12 +2,13 @@ package content
 
 import (
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"github.com/sundogrd/content-api/middlewares/sdsession"
-	"github.com/sundogrd/content-api/services/content"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+	"github.com/sundogrd/content-api/middlewares/sdsession"
+	"github.com/sundogrd/content-api/services/content"
 )
 
 type CreateContentRequest struct {

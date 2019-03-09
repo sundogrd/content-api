@@ -2,15 +2,16 @@ package main
 
 import (
 	"fmt"
+	"os"
+
 	"github.com/sundogrd/content-api/middlewares/sdsession"
 	"github.com/sundogrd/content-api/utils/config"
-	"os"
+	"github.com/sundogrd/content-api/utils/redis"
 
 	"github.com/sundogrd/content-api/routes"
 
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/utils/db"
-	"github.com/sundogrd/content-api/utils/redis"
 )
 
 // CORSMiddleware ...

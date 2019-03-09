@@ -2,13 +2,14 @@ package content
 
 import (
 	"fmt"
+	"net/http"
+	"strconv"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/services/content"
 	"github.com/sundogrd/content-api/services/user"
 	"github.com/sundogrd/content-api/utils/pointer"
-	"net/http"
-	"strconv"
-	"time"
 )
 
 // GetContentResponseAuthor ...

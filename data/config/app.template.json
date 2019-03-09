@@ -5,9 +5,9 @@
   "db": {
     "type": "mysql",
     "options": {
-      "user": "sundog",
-      "password": "sundogPwd",
-      "host": "localhost",
+      "user": "root",
+      "password": "breakIN",
+      "host": "127.0.0.1",
       "port": 3306,
       "dbname": "sundog",
       "connectTimeout": "10s"
