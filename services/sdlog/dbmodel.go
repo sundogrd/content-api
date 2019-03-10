@@ -14,5 +14,5 @@ type SDLogModel struct {
 }
 
 func (SDLogModel) TableName() string {
-	return "sd_log_models"
+	return "sd_logs"
 }

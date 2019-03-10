@@ -8,4 +8,5 @@ import (
 // SDLog ...
 func SDLog(r *gin.Engine) {
 	r.POST("/statement", sdlog.AddStatement)
+	r.GET("/statement", sdlog.GetStatement)
 }

@@ -9,14 +9,9 @@ import (
 )
 
 type SDLogServiceInterface interface {
-	// Put adds a new Greeting to the datastore
-	// FindOne(req FindOneRequest) (*FindOneResponse, error)
-	// Find(req FindRequest) (*FindResponse, error)
+	Find(req FindRequest) (*FindResponse, error)
 	Create(req CreateRequest) (*CreateResponse, error)
 	// Delete(req DeleteRequest) (*DeleteResponse, error)
-	// Update(req UpdateRequest) (*UpdateResponse, error)
-	// Read(req ReadRequest) (*ReadResponse, error)
-	// GetRecommendByContent(req GetRecommendByContentRequest) (*GetRecommendByContentResponse, error)
 }
 
 type SDLogService struct {

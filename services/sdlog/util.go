@@ -19,3 +19,19 @@ func marshalSDLogExtraJson(extra *SDLogExtra) (string, error) {
 	}
 	return string(marshaled), nil
 }
+
+func packSDLog(model SDLogModel) SDLog {
+	json, err := unmarshalSDLogExtraJson(model.Extra)
+	if err != nil {
+		json = &SDLogExtra{}
+	}
+	log := SDLog{
+		TargetID:  model.TargetID,
+		UserID:    model.UserID,
+		Type:      SDLogType(model.Type),
+		Extra:     *json,
+		LogID:     model.ID,
+		CreatedAt: model.CreatedAt,
+	}
+	return log
+}

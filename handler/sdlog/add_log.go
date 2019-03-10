@@ -20,10 +20,11 @@ type LogRequest struct {
 }
 
 type LogResponse struct {
-	UserID   string          `json:"user_id"`
-	TargetID string          `json:"target_id"`
-	Type     sdlog.SDLogType `json:"type"`
-	ID       string          `json:"id"`
+	UserID   string           `json:"user_id"`
+	TargetID string           `json:"target_id"`
+	Type     sdlog.SDLogType  `json:"type"`
+	ID       string           `json:"id"`
+	Extra    sdlog.SDLogExtra `json:"extra"`
 }
 
 func AddStatement(c *gin.Context) {
@@ -65,5 +66,6 @@ func AddStatement(c *gin.Context) {
 		ID:       strconv.FormatInt(res.LogID, 10),
 		UserID:   strconv.FormatInt(res.UserID, 10),
 		TargetID: strconv.FormatInt(res.TargetID, 10),
+		Extra:    res.Extra,
 	})
 }
