@@ -44,7 +44,7 @@ func AddStatement(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
-	res, err := sdlog.CreateSDLogServiceInstance().Create(sdlog.CreateRequest{
+	res, err := sdlog.SDLogServiceInstance().Create(sdlog.CreateRequest{
 		TargetID:  targetID,
 		UserID:    userID,
 		Type:      request.Type,

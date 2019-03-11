@@ -9,7 +9,7 @@ import (
 var _SDLogService *SDLogService
 var _SDLogServiceOnce sync.Once
 
-func CreateSDLogServiceInstance() *SDLogService {
+func SDLogServiceInstance() *SDLogService {
 	_SDLogServiceOnce.Do(func() {
 		db := dbUtils.Client
 		hasContentTable := db.HasTable(&SDLogModel{})

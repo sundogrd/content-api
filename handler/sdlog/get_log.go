@@ -74,7 +74,7 @@ func GetStatement(c *gin.Context) {
 		pageSize = int16(_pageSize)
 	}
 
-	res, err = sdlog.CreateSDLogServiceInstance().Find(sdlog.FindRequest{
+	res, err = sdlog.SDLogServiceInstance().Find(sdlog.FindRequest{
 		LogID:    &logID,
 		UserID:   &userID,
 		TargetID: &targetID,
