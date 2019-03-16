@@ -9,4 +9,5 @@ func Routes(r *gin.Engine) {
 	Hello(r)
 	Content(r)
 	Auth(r)
+	SDLog(r)
 }
