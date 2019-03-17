@@ -11,6 +11,7 @@ import (
 type SDLogServiceInterface interface {
 	Find(req FindRequest) (*FindResponse, error)
 	Create(req CreateRequest) (*CreateResponse, error)
+	Count(req CountRequest) (*CountResponse, error)
 	// Delete(req DeleteRequest) (*DeleteResponse, error)
 }
 

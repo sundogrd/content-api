@@ -44,6 +44,28 @@ func AddStatement(c *gin.Context) {
 	if err != nil {
 		panic(err)
 	}
+
+	// clap 同一用户同一文章最多50次鼓掌
+	if request.Type == sdlog.Clap {
+		countRes, countErr := sdlog.SDLogServiceInstance().Count(sdlog.CountRequest{
+			TargetID: &targetID,
+			UserID:   &userID,
+			Type:     &request.Type,
+		})
+		if countErr != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"msg": countErr,
+			})
+			return
+		}
+		if countRes.Count >= 50 {
+			c.JSON(http.StatusAccepted, gin.H{
+				"msg": "鼓掌次数最多50次",
+			})
+			return
+		}
+	}
+
 	res, err := sdlog.SDLogServiceInstance().Create(sdlog.CreateRequest{
 		TargetID:  targetID,
 		UserID:    userID,
