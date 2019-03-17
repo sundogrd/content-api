@@ -7,12 +7,12 @@ import (
 type SDLogType string
 
 const (
-	Clamp       SDLogType = "CLAMP"
-	CancelClamp SDLogType = "CANCELCLAMP"
-	Login       SDLogType = "LOGIN"
-	Logout      SDLogType = "LOGOUT"
-	Publish     SDLogType = "PUBLISH"
-	SIGN        SDLogType = "SIGN"
+	Clap       SDLogType = "CLAP"
+	CancelClap SDLogType = "CANCELCLAP"
+	Login      SDLogType = "LOGIN"
+	Logout     SDLogType = "LOGOUT"
+	Publish    SDLogType = "PUBLISH"
+	SIGN       SDLogType = "SIGN"
 )
 
 type SDLogExtra struct {

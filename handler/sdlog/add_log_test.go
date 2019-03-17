@@ -54,7 +54,7 @@ func TestAddLog(t *testing.T) {
 	{
 		"target_id": "23223",
 		"user_id": "33",
-		"type": "clamp",
+		"type": "clap",
 		"extra": {
 		"count": 55,
 		"detail": "hahah"
