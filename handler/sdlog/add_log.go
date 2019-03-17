@@ -46,7 +46,7 @@ func AddStatement(c *gin.Context) {
 	}
 
 	// clap 同一用户同一文章最多50次鼓掌
-	if string(request.Type) == "clap" {
+	if request.Type == sdlog.Clap {
 		countRes, countErr := sdlog.SDLogServiceInstance().Count(sdlog.CountRequest{
 			TargetID: &targetID,
 			UserID:   &userID,
