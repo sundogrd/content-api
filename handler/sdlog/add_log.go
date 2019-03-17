@@ -58,7 +58,7 @@ func AddStatement(c *gin.Context) {
 			})
 			return
 		}
-		if countRes.Count >= 10 {
+		if countRes.Count >= 50 {
 			c.JSON(http.StatusAccepted, gin.H{
 				"msg": "鼓掌次数最多50次",
 			})

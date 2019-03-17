@@ -7,7 +7,7 @@ import (
 
 // SDLog ...
 func SDLog(r *gin.Engine) {
-	r.POST("/statement", sdlog.AddStatement)
-	r.GET("/statement", sdlog.GetStatement)
-	r.GET("/statement/count", sdlog.GetStatementCount)
+	r.POST("/log", sdlog.AddStatement)
+	r.GET("/log", sdlog.GetStatement)
+	r.GET("/log/count", sdlog.GetStatementCount)
 }
