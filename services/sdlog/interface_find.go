@@ -46,9 +46,6 @@ func (ss SDLogService) Find(req FindRequest) (*FindResponse, error) {
 		if req.Type != nil {
 			db = db.Where("type = ?", *req.Type)
 		}
-		// if req.CreatedAt != nil {
-		// 	db = db.Where("created_at = ?", *req.Type)
-		// }
 	}
 
 	db.Limit(pageSize).Offset((page - 1) * (pageSize))
