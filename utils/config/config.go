@@ -9,7 +9,7 @@ import (
 
 // Init ...
 func Init() {
-	viper.SetConfigName("app.template")
+	viper.SetConfigName("app")
 	viper.AddConfigPath("./data/config/")
 	err := viper.ReadInConfig()
 	if err != nil {
