@@ -1,17 +1,12 @@
-FROM alpine:3.8
+FROM golang:latest
 
-ENV appdir /app
-ARG port=8086
+WORKDIR $GOPATH/src/github.com/sundogrd/content-api
+COPY . $GOPATH/src/github.com/sundogrd/content-api
 
-RUN mkdir -p $appdir
-WORKDIR $appdir
+ENV GO111MODULE=on
+ENV GOFLAGS=-mod=vendor
 
-ADD Makefile .
-ADD ./bin ./bin
-ADD ./data/config/app.json ./data/config/app.json
+RUN go build .
 
-RUN echo http://mirrors.aliyun.com/alpine/v3.8/main > /etc/apk/repositories \
-    && echo http://mirrors.aliyun.com/alpine/v3.8/main >> /etc/apk/repositories \
-    && apk add --no-cache make
-
-EXPOSE $port
+EXPOSE 8086
+ENTRYPOINT ["./content-api"]
