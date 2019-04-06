@@ -12,7 +12,7 @@ ARG GITHUB_SECRET
 RUN go build .
 RUN "./devops/build_docker.sh" $GITHUB_CLIENT_ID $GITHUB_SECRET
 
-RUN ip -4 route list match 0/0 | awk '{print $3 " host.docker.internal"}'
+RUN ip -4 route list match 0/0 | awk '{print $3 " host.docker.internal"}' >> /etc/hosts
 
 EXPOSE 8086
 ENTRYPOINT ["./content-api"]
