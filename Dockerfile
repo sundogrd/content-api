@@ -10,7 +10,7 @@ ARG GITHUB_CLIENT_ID
 ARG GITHUB_SECRET
 
 RUN go build .
-RUN "./devops/build_docker.sh"
+RUN "./devops/build_docker.sh" $GITHUB_CLIENT_ID $GITHUB_SECRET
 
 EXPOSE 8086
 ENTRYPOINT ["./content-api"]
