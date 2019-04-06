@@ -29,7 +29,7 @@
         "ClientSecret": "Your Github ClientSecret"
       },
       "scopes": ["user"],
-      "redirectUrl": "http://localhost:8086/oauth2/github/callback"
+      "redirectUrl": "http://lwio.sundogrd.com/api/oauth2/github/callback"
     }
   }
 }
