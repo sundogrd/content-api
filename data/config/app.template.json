@@ -7,14 +7,14 @@
     "options": {
       "user": "sundog",
       "password": "sundogPwd",
-      "host": "localhost",
+      "host": "host.docker.internal",
       "port": 3306,
       "dbname": "sundog",
       "connectTimeout": "10s"
     }
   },
   "redis": {
-    "host": "localhost",
+    "host": "host.docker.internal",
     "port": 6379,
     "password": ""
   },
