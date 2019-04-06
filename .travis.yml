@@ -14,4 +14,4 @@ after_success:
 - docker build -t sundogrd/content-api:$TRAVIS_BRANCH-$TRAVIS_BUILD_ID --build-arg GITHUB_CLIENT_ID=$GITHUB_CLIENT_ID --build-arg GITHUB_SECRET=$GITHUB_SECRET .
 - docker push sundogrd/content-api:$TRAVIS_BRANCH-$TRAVIS_BUILD_ID;
 - chmod 600 ~/.ssh/id_rsa
-- ssh sundogrd@sundogrd.com -o StrictHostKeyChecking=no 'cd ~/content-api && sh ./devops/deploy.sh $TRAVIS_BRANCH-$TRAVIS_BUILD_ID $GITHUB_CLIENT_ID $GITHUB_SECRET'
+- ssh sundogrd@sundogrd.com -o StrictHostKeyChecking=no 'cd ~/content-api && echo "./devops/deploy.sh $TRAVIS_BRANCH-$TRAVIS_BUILD_ID $GITHUB_CLIENT_ID $GITHUB_SECRET"  && sh ./devops/deploy.sh $TRAVIS_BRANCH-$TRAVIS_BUILD_ID $GITHUB_CLIENT_ID $GITHUB_SECRET'
