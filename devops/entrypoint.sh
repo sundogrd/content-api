@@ -13,3 +13,4 @@ fi
 
 echo "$DOCKER_HOST host.docker.internal" >> /etc/hosts
 
+./content-api
