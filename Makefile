@@ -10,12 +10,6 @@ start:
 build:
 	@export GO111MODULE=on && export GOFLAGS=-mod=vendor && go build -o bin/$(GONAME)
 
-run:
-	@./bin/$(GONAME) 
-
-lint:
-	@golint
-
 clean:
 	@go clean && rm -rf ./bin/$(GONAME) && rm -f gin-bin
 
@@ -26,20 +20,8 @@ dev:
 	@go build && go run main.go
 	# @gin -a 8086 -p 3030 run main.go
 
-docker-build: clean
-	@docker-compose -f docker/development/docker-compose.yml run --rm api make build
+init:
+	@sh ./devops/grpc_gen.sh
 
-docker-image: docker-build 
-	@docker build -t my-api:latest .
-
-docker-image-staging: docker-build 
-	@docker build -t my-api:staging .
-
-docker-image-dev:
-	@docker-compose -f docker-compose.yml run --rm api
-
-start-docker-dev:
-	@docker-compose up -d
-
-stop-docker-dev:
-	@docker-compose down
+update:
+	@git submodule foreach git pull

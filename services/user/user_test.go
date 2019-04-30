@@ -41,7 +41,7 @@ func TestUserService_Create(t *testing.T) {
 	}
 	res, err := user.UserServiceInstance().Create(user.CreateRequest{
 		Name:      "LWio",
-		AvatarUrl: "https://avatars1.githubusercontent.com/u/9214496?v=4",
+		AvatarURL: "https://avatars1.githubusercontent.com/u/9214496?v=4",
 		Company:   pointer.String("Bytedance"),
 		Email:     pointer.String("liang.peare@gmail.com"),
 		Extra: user.BaseInfoExtra{

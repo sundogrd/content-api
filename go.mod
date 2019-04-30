@@ -5,6 +5,7 @@ require (
 	github.com/gin-gonic/gin v1.3.0
 	github.com/go-redis/redis v6.15.1+incompatible
 	github.com/go-sql-driver/mysql v1.4.1 // indirect
+	github.com/golang/protobuf v1.3.2-0.20190409050943-e91709a02e0e
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/jinzhu/gorm v1.9.2
@@ -17,5 +18,6 @@ require (
 	github.com/stretchr/testify v1.3.0
 	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9
 	golang.org/x/oauth2 v0.0.0-20190226205417-e64efc72b421
+	google.golang.org/grpc v1.20.0
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 )

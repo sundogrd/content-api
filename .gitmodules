@@ -1,0 +1,3 @@
+[submodule "devops/idl"]
+	path = devops/idl
+	url = https://github.com/sundogrd/idl.git

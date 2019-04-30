@@ -6,7 +6,9 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/google/go-github/github"
+	"github.com/sundogrd/content-api/grpc_gen/user"
 	"github.com/sundogrd/content-api/middlewares/sdsession"
+	userRpc "github.com/sundogrd/content-api/providers/grpc/user"
 	userService "github.com/sundogrd/content-api/services/user"
 	"net/http"
 
@@ -151,5 +153,26 @@ func I(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"name": sess.Get("user_name"),
 		"id":   sess.Get("user_id"),
+	})
+}
+
+func GrpcTest(c *gin.Context) {
+	client, conn, err := userRpc.NewGrpcUserClient()
+	defer conn.Close()
+	if err != nil {
+		c.JSON(500, gin.H{
+			"err": err.Error(),
+		})
+	}
+	res, err := client.GetUser(c, &user.GetUserRequest{
+		UserId: 123,
+	})
+	if err != nil {
+		c.JSON(500, gin.H{
+			"err": err.Error(),
+		})
+	}
+	c.JSON(200, gin.H{
+		"res": res,
 	})
 }
