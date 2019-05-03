@@ -1,8 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
+	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
+	"github.com/sundogrd/content-api/grpc_gen/comment"
+	"github.com/sundogrd/content-api/grpc_gen/user"
 	"github.com/sundogrd/content-api/middlewares/cors"
+	comment2 "github.com/sundogrd/content-api/providers/grpc/comment"
 	"os"
 
 	"github.com/sundogrd/content-api/middlewares/sdsession"
@@ -16,6 +22,13 @@ import (
 )
 
 type Container struct {
+	GormDB            *gorm.DB
+	RedisClient       *redis.Client
+	CommentGrpcClient comment.CommentServiceClient
+	UserGrpcClient    user.UserServiceClient
+}
+
+func Init() {
 
 }
 
@@ -39,6 +52,16 @@ func main() {
 		os.Exit(1)
 	}
 	defer dbClient.Close()
+
+	commentClient, _, err := comment2.NewGrpcCommentClient()
+	if err != nil {
+		fmt.Printf("[Main] Init commentClient error: %+v", err)
+		os.Exit(1)
+	}
+
+	_ := Container{
+		CommentGrpcClient: commentClient,
+	}
 
 	r := gin.Default()
 	r.HandleMethodNotAllowed = true
