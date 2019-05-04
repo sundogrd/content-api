@@ -1,12 +1,8 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"github.com/jinzhu/gorm"
-	"github.com/sirupsen/logrus"
-	"github.com/sundogrd/content-api/grpc_gen/comment"
-	"github.com/sundogrd/content-api/grpc_gen/user"
+	"github.com/sundogrd/content-api/env"
 	"github.com/sundogrd/content-api/middlewares/cors"
 	comment2 "github.com/sundogrd/content-api/providers/grpc/comment"
 	"os"
@@ -20,13 +16,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/utils/db"
 )
-
-type Container struct {
-	GormDB            *gorm.DB
-	RedisClient       *redis.Client
-	CommentGrpcClient comment.CommentServiceClient
-	UserGrpcClient    user.UserServiceClient
-}
 
 func Init() {
 
@@ -59,7 +48,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	_ := Container{
+	container := env.Container{
 		CommentGrpcClient: commentClient,
 	}
 
@@ -75,7 +64,7 @@ func main() {
 		"Domain":""
 	}`))
 
-	routes.Routes(r)
+	routes.Routes(r, container)
 
 	r.NoMethod(func(c *gin.Context) {
 		c.JSON(405, gin.H{"errcode": 405, "errmsg": "Method Not Allowed"})
