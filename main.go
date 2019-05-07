@@ -2,6 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/sundogrd/content-api/env"
+	"github.com/sundogrd/content-api/middlewares/cors"
+	comment2 "github.com/sundogrd/content-api/providers/grpc/comment"
 	"os"
 
 	"github.com/sundogrd/content-api/middlewares/sdsession"
@@ -14,21 +17,8 @@ import (
 	"github.com/sundogrd/content-api/utils/db"
 )
 
-// CORSMiddleware ...
-func CORSMiddleware() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-		c.Writer.Header().Set("Access-Control-Max-Age", "86400")
-		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, UPDATE")
-		c.Writer.Header().Set("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding, x-access-token")
-		c.Writer.Header().Set("Access-Control-Expose-Headers", "Content-Length")
-		// c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
-		if c.Request.Method == "OPTIONS" {
-			c.AbortWithStatus(200)
-		} else {
-			c.Next()
-		}
-	}
+func Init() {
+
 }
 
 func main() {
@@ -52,9 +42,19 @@ func main() {
 	}
 	defer dbClient.Close()
 
+	commentClient, _, err := comment2.NewGrpcCommentClient()
+	if err != nil {
+		fmt.Printf("[Main] Init commentClient error: %+v", err)
+		os.Exit(1)
+	}
+
+	container := env.Container{
+		CommentGrpcClient: commentClient,
+	}
+
 	r := gin.Default()
 	r.HandleMethodNotAllowed = true
-	r.Use(CORSMiddleware())
+	r.Use(cors.CORSMiddleware())
 	r.Use(sdsession.Middleware(`{
 		"storeDriver":"redis",
 		"cookieName":"session_id",
@@ -64,7 +64,7 @@ func main() {
 		"Domain":""
 	}`))
 
-	routes.Routes(r)
+	routes.Routes(r, container)
 
 	r.NoMethod(func(c *gin.Context) {
 		c.JSON(405, gin.H{"errcode": 405, "errmsg": "Method Not Allowed"})
