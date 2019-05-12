@@ -16,6 +16,6 @@ require (
 	github.com/spf13/viper v1.3.1
 	github.com/stretchr/testify v1.3.0
 	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9
-	golang.org/x/oauth2 v0.0.0-20190115181402-5dab4167f31c
+	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
 )
