@@ -2,11 +2,14 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/sundogrd/content-api/env"
 )
 
 // Routes ...
-func Routes(r *gin.Engine) {
+func Routes(r *gin.Engine, container env.Container) {
 	Hello(r)
 	Content(r)
 	Auth(r)
+	SDLog(r)
+	Comment(r, container)
 }

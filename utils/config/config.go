@@ -13,7 +13,7 @@ func Init() {
 	viper.AddConfigPath("./data/config/")
 	err := viper.ReadInConfig()
 	if err != nil {
-		fmt.Println("No configuration file loaded - using defaults")
+		fmt.Printf("No configuration file loaded - using defaults, err: %#v \n", err)
 	}
 }
 

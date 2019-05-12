@@ -7,14 +7,14 @@
     "options": {
       "user": "sundog",
       "password": "sundogPwd",
-      "host": "localhost",
+      "host": "host.docker.internal",
       "port": 3306,
       "dbname": "sundog",
       "connectTimeout": "10s"
     }
   },
   "redis": {
-    "host": "localhost",
+    "host": "host.docker.internal",
     "port": 6379,
     "password": ""
   },
@@ -29,7 +29,7 @@
         "ClientSecret": "Your Github ClientSecret"
       },
       "scopes": ["user"],
-      "redirectUrl": "http://localhost:8086/oauth2/github/callback"
+      "redirectUrl": "http://lwio.sundogrd.com/api/oauth2/github/callback"
     }
   }
 }

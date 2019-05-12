@@ -1,17 +1,18 @@
-FROM alpine:3.8
+FROM golang:latest
 
-ENV appdir /app
-ARG port=8086
+WORKDIR $GOPATH/src/github.com/sundogrd/content-api
+COPY . $GOPATH/src/github.com/sundogrd/content-api
 
-RUN mkdir -p $appdir
-WORKDIR $appdir
+ENV GO111MODULE=on
+ENV GOFLAGS=-mod=vendor
 
-ADD Makefile .
-ADD ./bin ./bin
-ADD ./data/config/app.json ./data/config/app.json
+ARG GITHUB_CLIENT_ID
+ARG GITHUB_SECRET
 
-RUN echo http://mirrors.aliyun.com/alpine/v3.8/main > /etc/apk/repositories \
-    && echo http://mirrors.aliyun.com/alpine/v3.8/main >> /etc/apk/repositories \
-    && apk add --no-cache make
+RUN go build .
+RUN "./devops/build_docker.sh" $GITHUB_CLIENT_ID $GITHUB_SECRET
 
-EXPOSE $port
+#RUN ip -4 route list match 0/0 | awk '{print $3 " host.docker.internal"}' >> /etc/hosts
+
+EXPOSE 8086
+ENTRYPOINT ["./devops/entrypoint.sh"]
