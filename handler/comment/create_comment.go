@@ -1,6 +1,7 @@
 package comment
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/sundogrd/content-api/env"
 	"github.com/sundogrd/content-api/grpc_gen/comment"
+	"github.com/sundogrd/content-api/middlewares/sdsession"
 )
 
 type CreateCommentRequest struct {
@@ -72,22 +74,22 @@ func CreateComment(container env.Container) gin.HandlerFunc {
 		}
 
 		logrus.Info("3")
-		// sess := sdsession.GetSession(c)
-		// if sess.Get("user_id") == nil {
-		// 	c.JSON(http.StatusUnauthorized, gin.H{
-		// 		"msg": "user not login",
-		// 	})
-		// 	return
-		// }
+		sess := sdsession.GetSession(c)
+		if sess.Get("user_id") == nil {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"msg": "user not login",
+			})
+			return
+		}
 
-		// authorID, err := sess.Get("user_id").(json.Number).Int64()
-		// if err != nil {
-		// 	c.JSON(http.StatusInternalServerError, gin.H{
-		// 		"msg": err.Error(),
-		// 	})
-		// 	return
-		// }
-		authorID := int64(312337740408565760)
+		authorID, err := sess.Get("user_id").(json.Number).Int64()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"msg": err.Error(),
+			})
+			return
+		}
+		// authorID := int64(312337740408565760)
 
 		var params = &comment.CreateCommentRequest_CommentCreateParams{}
 
