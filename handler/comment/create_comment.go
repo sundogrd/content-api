@@ -14,9 +14,9 @@ import (
 )
 
 type CreateCommentRequest struct {
-	ContentID   string `form:"content_id" json:"content_id"`
-	ParentID    string `form:"parent_id" json:"parent_id"`
-	ReCommentID string `form:"re_comment_id" json:"re_comment_id"`
+	ContentID   string `form:"content_id" json:"content_id"`       // 内容对象id, 内容对象我们这里指文章
+	ParentID    string `form:"parent_id" json:"parent_id"`         // 父级对象id, 这里一般指主评论
+	ReCommentID string `form:"re_comment_id" json:"re_comment_id"` // 回复id, 对主评论下回复的回复id
 	Content     string `form:"content" json:"content"`
 }
 type CreateCommentResponse struct {
