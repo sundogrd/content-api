@@ -15,7 +15,7 @@ type GetQiniuTokenRequest struct {
 
 // GetQiniuTokenResponse ...
 type GetQiniuTokenResponse struct {
-	Token string `json:"token"`
+	UpToken string `json:"uptoken"`
 }
 
 // GetQiniuToken ...
@@ -38,6 +38,6 @@ func GetQiniuToken(c *gin.Context) {
 	upToken := putPolicy.UploadToken(mac)
 
 	c.JSON(http.StatusOK, GetQiniuTokenResponse{
-		Token: upToken,
+		UpToken: upToken,
 	})
 }
