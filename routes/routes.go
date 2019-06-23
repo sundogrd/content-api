@@ -12,4 +12,5 @@ func Routes(r *gin.Engine, container env.Container) {
 	Auth(r)
 	SDLog(r)
 	Comment(r, container)
+	Uploader(r)
 }

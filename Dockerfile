@@ -4,7 +4,7 @@ WORKDIR $GOPATH/src/github.com/sundogrd/content-api
 COPY . $GOPATH/src/github.com/sundogrd/content-api
 
 ENV GO111MODULE=on
-ENV GOFLAGS=-mod=vendor
+ENV GOPROXY=https://goproxy.cn
 
 ARG GITHUB_CLIENT_ID
 ARG GITHUB_SECRET
