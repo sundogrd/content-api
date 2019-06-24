@@ -30,6 +30,11 @@
       },
       "scopes": ["user"],
       "redirectUrl": "http://lwio.sundogrd.com/api/oauth2/github/callback"
+    },
+    "qiniu": {
+      "accessKey": "your_access_key",
+      "secretKey": "your_secret_key",
+      "bucket": "sundog"
     }
   }
 }

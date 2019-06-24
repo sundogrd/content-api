@@ -3,7 +3,7 @@ go:
 - 1.11
 install:
 - export GO111MODULE=on
-- export GOFLAGS=-mod=vendor
+- export GOPROXY=https://goproxy.cn
 script:
 - make build
 before_install:

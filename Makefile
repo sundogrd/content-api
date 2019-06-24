@@ -17,7 +17,7 @@ doc:
 	godoc -http=:6060 -index
 
 dev:
-	@export GOPROXY=https://goproxy.cn && export GO111MODULE=on && go build && go run main.go
+	@export GOPROXY=https://goproxy.cn && export GO111MODULE=on && go run main.go
 	# @gin -a 8086 -p 3030 run main.go
 
 init:
