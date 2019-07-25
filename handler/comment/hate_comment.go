@@ -44,7 +44,7 @@ func HateComment(container env.Container) gin.HandlerFunc {
 			CommentId: commentIDNum,
 		})
 		if err != nil {
-			log.Fatalln(err)
+			logrus.Fatalln(err)
 			c.JSON(http.StatusInternalServerError, gin.H{
 				"msg": err.Error(),
 			})
