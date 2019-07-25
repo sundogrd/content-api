@@ -1,7 +1,6 @@
 package comment
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 

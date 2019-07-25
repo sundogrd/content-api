@@ -1,0 +1,25 @@
+{
+    "name": "App",
+    "port": 8086,
+    "home_page": "Your Home Page",
+    "db": {
+      "type": "mysql",
+      "options": {
+        "user": "root",
+        "password": "LWezio123#",
+        "host": "localhost",
+        "port": "3306",
+        "dbname": "sundog",
+        "connectTimeout": "10s"
+      }
+    },
+    "redis": {
+      "host": "localhost",
+      "port": 6379,
+      "password": ""
+    },
+    "grpcService": {
+      "host": "localhost",
+      "port": "24952"
+    }
+  }
