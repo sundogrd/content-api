@@ -2,9 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/sundogrd/content-api/env"
+	"github.com/sundogrd/content-api/di"
 	"github.com/sundogrd/content-api/middlewares/cors"
-	comment2 "github.com/sundogrd/content-api/providers/grpc/comment"
+	"github.com/sundogrd/content-api/providers/grpc/comment"
+	"github.com/sundogrd/content-api/providers/grpc/content"
 	"os"
 
 	"github.com/sundogrd/content-api/middlewares/sdsession"
@@ -42,14 +43,20 @@ func main() {
 	}
 	defer dbClient.Close()
 
-	commentClient, _, err := comment2.NewGrpcCommentClient()
+	commentClient, _, err := comment.NewGrpcCommentClient()
+	if err != nil {
+		fmt.Printf("[Main] Init commentClient error: %+v", err)
+		os.Exit(1)
+	}
+	contentClient, _, err := content.NewGrpcContentClient()
 	if err != nil {
 		fmt.Printf("[Main] Init commentClient error: %+v", err)
 		os.Exit(1)
 	}
 
-	container := env.Container{
+	container := di.Container{
 		CommentGrpcClient: commentClient,
+		ContentGrpcClient: contentClient,
 	}
 
 	r := gin.Default()

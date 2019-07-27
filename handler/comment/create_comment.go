@@ -20,7 +20,7 @@ type CreateCommentResponse struct {
 	CommentID string `json:"comment_id"`
 }
 
-func CreateComment(container env.Container) gin.HandlerFunc {
+func CreateComment(container di.Container) gin.HandlerFunc {
 	logrus.Info("-1")
 	return func(c *gin.Context) {
 		logrus.Info("0")

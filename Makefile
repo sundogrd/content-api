@@ -24,4 +24,9 @@ init:
 	@sh ./devops/grpc_gen.sh
 
 update:
-	@git submodule foreach git pull --allow-unrelated-histories
+	@git submodule foreach git pull --rebase --allow-unrelated-histories
+
+# generate_c:
+#	protoc --proto_path=devops/idl --go_out=plugins=grpc:grpc_gen devops/idl/user/info.proto \
+#     protoc --proto_path=devops/idl --go_out=plugins=grpc:grpc_gen devops/idl/comment/info.proto \
+#     protoc --proto_path=devops/idl --go_out=plugins=grpc:grpc_gen devops/idl/content/info.proto

@@ -6,7 +6,7 @@ import (
 )
 
 // Routes ...
-func Routes(r *gin.Engine, container env.Container) {
+func Routes(r *gin.Engine, container di.Container) {
 	Hello(r)
 	Content(r)
 	Auth(r)

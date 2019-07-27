@@ -17,6 +17,7 @@ require (
 	github.com/soheilhy/cmux v0.1.4 // indirect
 	github.com/spf13/viper v1.3.2
 	github.com/stretchr/testify v1.3.0
+	github.com/sundogrd/content-grpc v0.0.0-20190727095316-36f091565b62
 	github.com/sundogrd/gopkg v0.0.0-20190503104757-4333365a52f6
 	github.com/tmc/grpc-websocket-proxy v0.0.0-20190109142713-0ad062ec5ee5 // indirect
 	github.com/zheng-ji/goSnowFlake v0.0.0-20180906112711-fc763800eec9

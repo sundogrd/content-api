@@ -6,7 +6,7 @@ import (
 	"github.com/sundogrd/content-api/handler/comment"
 )
 
-func Comment(r *gin.Engine, container env.Container) {
+func Comment(r *gin.Engine, container di.Container) {
 	r.POST("/comments", comment.CreateComment(container))
 	r.GET("/comments", comment.ListComment(container))
 }
