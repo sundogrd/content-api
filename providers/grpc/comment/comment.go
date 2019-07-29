@@ -1,20 +1,21 @@
 package comment
 
 import (
+	"log"
+
 	"github.com/sundogrd/content-api/grpc_gen/comment"
 	grpcUtils "github.com/sundogrd/gopkg/grpc"
 	"google.golang.org/grpc"
-	"log"
 )
 
 const (
 	//address     = "localhost:50052"
-	address = "sundog.comment"
+	address     = "sundog.comment"
 	defaultName = "sundog.comment"
 )
 
 // NewGrpcCommentClient
-func NewGrpcCommentClient() (comment.CommentServiceClient, *grpc.ClientConn,error)  {
+func NewGrpcCommentClient() (comment.CommentServiceClient, *grpc.ClientConn, error) {
 	r, err := grpcUtils.NewGrpcResolover()
 	if err != nil {
 		return nil, nil, err
