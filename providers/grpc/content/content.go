@@ -1,20 +1,20 @@
-package comment
+package content
 
 import (
 	"github.com/sirupsen/logrus"
-	"github.com/sundogrd/content-api/grpc_gen/comment"
+	"github.com/sundogrd/content-api/grpc_gen/content"
 	grpcUtils "github.com/sundogrd/gopkg/grpc"
 	"google.golang.org/grpc"
 )
 
 const (
 	//address     = "localhost:50052"
-	address     = "sundog.comment"
-	defaultName = "sundog.comment"
+	address     = "sundog.content"
+	defaultName = "sundog.content"
 )
 
-// NewGrpcCommentClient
-func NewGrpcCommentClient() (comment.CommentServiceClient, *grpc.ClientConn, error) {
+// NewGrpcContentClient ...
+func NewGrpcContentClient() (content.ContentServiceClient, *grpc.ClientConn, error) {
 	r, err := grpcUtils.NewGrpcResolover()
 	if err != nil {
 		return nil, nil, err
@@ -27,6 +27,6 @@ func NewGrpcCommentClient() (comment.CommentServiceClient, *grpc.ClientConn, err
 		logrus.Fatalf("did not connect: %v", err)
 		return nil, nil, err
 	}
-	c := comment.NewCommentServiceClient(conn)
+	c := content.NewContentServiceClient(conn)
 	return c, conn, nil
 }

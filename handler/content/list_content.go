@@ -1,10 +1,10 @@
 package content
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/sundogrd/content-api/di"
+	contentGrpc "github.com/sundogrd/content-api/grpc_gen/content"
 	"github.com/sundogrd/content-api/services/content"
-	"log"
 	"net/http"
 )
 
@@ -14,57 +14,51 @@ type ListContentRequest struct {
 	AuthorID   *int64                 `form:"author_id" json:"author_id"`
 	Status     *content.ContentStatus `form:"status" json:"status"`
 	ContentIDs []int64                `form:"content_ids" json:"content_ids"`
-	Page       *int16                 `form:"page" json:"page"`
-	PageSize   *int16                 `form:"page_size" json:"page_size"`
+	Page       *int32                 `form:"page" json:"page"`
+	PageSize   *int32                 `form:"page_size" json:"page_size"`
 }
 type ListContentResponse struct {
-	List  []content.BaseInfo `json:"list"`
+	List  []*contentGrpc.Content `json:"list"`
 	Total int64              `json:"total"`
 }
 
-// ListContent ...
-// type title author category type created_at updated_at
-func ListContent(c *gin.Context) {
-	var request ListContentRequest
-	if err := c.ShouldBindQuery(&request); err != nil {
-		fmt.Errorf("[handler/content] ListContent ShouldBindQuery err: %+v", err)
-		c.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
+func ListContent(container *di.Container) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var req ListContentRequest
+		if err := c.ShouldBind(&req); err != nil {
+			c.JSON(http.StatusUnprocessableEntity, gin.H{
+				"code": 500126,
+				"msg": err.Error(),
+			})
+			return
+		}
+		page := int32(1)
+		pageSize := int32(10)
+		if req.Page != nil {
+			page = *req.Page
+		}
+		if req.PageSize != nil {
+			pageSize = *req.PageSize
+		}
+
+
+		listRes, err := container.ContentGrpcClient.ListContents(c, &contentGrpc.ListContentsRequest{
+			AppId: "lwio",
+			Page: page,
+			PageSize: pageSize,
+			State: contentGrpc.EContentState_PUBLISHED,
+		})
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"code": 500126,
+				"msg": err.Error(),
+			})
+			return
+		}
+		c.JSON(http.StatusOK, ListContentResponse{
+			List:  listRes.Contents,
+			Total: listRes.Total,
 		})
 		return
 	}
-	findReq := content.FindRequest{}
-
-	if request.Title != nil {
-		findReq.Title = request.Title
-	}
-	if request.Status != nil {
-		findReq.Status = request.Status
-	}
-	if request.AuthorID != nil {
-		findReq.AuthorID = request.AuthorID
-	}
-	if request.Type != nil {
-		findReq.Type = request.Type
-	}
-	if request.ContentIDs != nil {
-		findReq.ContentIDs = &(request.ContentIDs)
-	}
-	if request.Page != nil {
-		findReq.Page = request.Page
-	}
-	if request.PageSize != nil {
-		findReq.PageSize = request.PageSize
-	}
-	res, err := content.ContentServiceInstance().Find(findReq)
-	if err != nil {
-		log.Fatalln(err)
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"msg": err.Error(),
-		})
-	}
-	c.JSON(http.StatusOK, ListContentResponse{
-		List:  res.List,
-		Total: res.Total,
-	})
 }

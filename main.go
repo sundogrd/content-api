@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/sundogrd/content-api/env"
+	"github.com/sirupsen/logrus"
+	"github.com/sundogrd/content-api/di"
 	"github.com/sundogrd/content-api/middlewares/cors"
-	comment2 "github.com/sundogrd/content-api/providers/grpc/comment"
 	"os"
 
 	"github.com/sundogrd/content-api/middlewares/sdsession"
@@ -16,10 +16,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/sundogrd/content-api/utils/db"
 )
-
-func Init() {
-
-}
 
 func main() {
 	var err error
@@ -34,22 +30,19 @@ func main() {
 		fmt.Printf("[Main] Init Redis error: %+v", err)
 		os.Exit(1)
 	}
+	logrus.Infof("redis init success")
 	// 初始化数据库
 	dbClient, err := db.Init()
 	if err != nil {
 		fmt.Printf("[Main] Init DB error: %+v", err)
 		os.Exit(1)
 	}
+	logrus.Infof("mysql init success")
 	defer dbClient.Close()
 
-	commentClient, _, err := comment2.NewGrpcCommentClient()
+	container, err := di.InitContainer()
 	if err != nil {
-		fmt.Printf("[Main] Init commentClient error: %+v", err)
-		os.Exit(1)
-	}
 
-	container := env.Container{
-		CommentGrpcClient: commentClient,
 	}
 
 	r := gin.Default()

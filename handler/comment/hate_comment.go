@@ -6,7 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"github.com/sundogrd/content-api/env"
+	"github.com/sundogrd/content-api/di"
 	"github.com/sundogrd/content-api/grpc_gen/comment"
 )
 
@@ -19,7 +19,7 @@ type HateCommentResponse struct {
 
 // ListContent ...
 // type title author category type created_at updated_at
-func HateComment(container env.Container) gin.HandlerFunc {
+func HateComment(container *di.Container) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var request HateCommentRequest
 		if err := c.ShouldBindJSON(&request); err != nil {

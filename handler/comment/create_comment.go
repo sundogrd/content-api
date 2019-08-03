@@ -8,7 +8,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"github.com/sundogrd/content-api/env"
+	"github.com/sundogrd/content-api/di"
 	"github.com/sundogrd/content-api/grpc_gen/comment"
 	"github.com/sundogrd/content-api/middlewares/sdsession"
 )
@@ -23,7 +23,7 @@ type CreateCommentResponse struct {
 	CommentID string `json:"comment_id"`
 }
 
-func CreateComment(container env.Container) gin.HandlerFunc {
+func CreateComment(container *di.Container) gin.HandlerFunc {
 	logrus.Info("-1")
 	return func(c *gin.Context) {
 		logrus.Info("0")
