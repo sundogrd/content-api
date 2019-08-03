@@ -2,6 +2,7 @@ package content
 
 import (
 	"encoding/json"
+	"github.com/sundogrd/content-api/di"
 	"log"
 	"net/http"
 	"strconv"
@@ -24,49 +25,51 @@ type CreateContentResponse struct {
 	AuthorID  string `json:"author_id"`
 }
 
-func CreateContent(c *gin.Context) {
-	var request CreateContentRequest
-	if err := c.ShouldBindJSON(&request); err != nil {
-		c.JSON(http.StatusUnprocessableEntity, gin.H{
-			"msg": err.Error(),
-		})
-		return
-	}
-	sess := sdsession.GetSession(c)
-	if sess.Get("user_id") == nil {
-		c.JSON(http.StatusUnauthorized, gin.H{
-			"msg": "user not login",
-		})
-		return
-	}
+func CreateContent(container *di.Container) gin.HandlerFunc {
+	return func(c *gin.Context) {
+		var request CreateContentRequest
+		if err := c.ShouldBindJSON(&request); err != nil {
+			c.JSON(http.StatusUnprocessableEntity, gin.H{
+				"msg": err.Error(),
+			})
+			return
+		}
+		sess := sdsession.GetSession(c)
+		if sess.Get("user_id") == nil {
+			c.JSON(http.StatusUnauthorized, gin.H{
+				"msg": "user not login",
+			})
+			return
+		}
 
-	authorID, err := sess.Get("user_id").(json.Number).Int64()
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"msg": err.Error(),
+		authorID, err := sess.Get("user_id").(json.Number).Int64()
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"msg": err.Error(),
+			})
+			return
+		}
+		res, err := content.ContentServiceInstance().Create(content.CreateRequest{
+			Title:       request.Title,
+			Description: "",
+			AuthorID:    authorID,
+			Category:    "",
+			Status:      request.Status,
+			Type:        request.Type,
+			Body:        request.Body,
+			Extra:       content.BaseInfoExtra{},
 		})
-		return
-	}
-	res, err := content.ContentServiceInstance().Create(content.CreateRequest{
-		Title:       request.Title,
-		Description: "",
-		AuthorID:    authorID,
-		Category:    "",
-		Status:      request.Status,
-		Type:        request.Type,
-		Body:        request.Body,
-		Extra:       content.BaseInfoExtra{},
-	})
-	if err != nil {
-		log.Fatalln(err)
-		c.JSON(http.StatusInternalServerError, gin.H{
-			"msg": err.Error(),
+		if err != nil {
+			log.Fatalln(err)
+			c.JSON(http.StatusInternalServerError, gin.H{
+				"msg": err.Error(),
+			})
+			return
+		}
+		c.JSON(http.StatusOK, CreateContentResponse{
+			BaseInfo:  res.BaseInfo,
+			ContentID: strconv.FormatInt(res.ContentID, 10),
+			AuthorID:  strconv.FormatInt(res.AuthorID, 10),
 		})
-		return
 	}
-	c.JSON(http.StatusOK, CreateContentResponse{
-		BaseInfo:  res.BaseInfo,
-		ContentID: strconv.FormatInt(res.ContentID, 10),
-		AuthorID:  strconv.FormatInt(res.AuthorID, 10),
-	})
 }

@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
-	"github.com/sundogrd/content-api/env"
+	"github.com/sundogrd/content-api/di"
 	"github.com/sundogrd/content-api/grpc_gen/comment"
 )
 
@@ -23,7 +23,7 @@ type ListCommentResponse struct {
 
 // ListContent ...
 // type title author category type created_at updated_at
-func ListComment(container di.Container) gin.HandlerFunc {
+func ListComment(container *di.Container) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		var request ListCommentRequest
 		if err := c.ShouldBindQuery(&request); err != nil {

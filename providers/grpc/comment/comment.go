@@ -1,8 +1,7 @@
 package comment
 
 import (
-	"log"
-
+	"github.com/sirupsen/logrus"
 	"github.com/sundogrd/content-api/grpc_gen/comment"
 	grpcUtils "github.com/sundogrd/gopkg/grpc"
 	"google.golang.org/grpc"
@@ -25,7 +24,7 @@ func NewGrpcCommentClient() (comment.CommentServiceClient, *grpc.ClientConn, err
 	// WithBlock https://gocn.vip/question/931  wtf
 	conn, err := grpc.Dial(address, grpc.WithBalancer(b), grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
-		log.Fatalf("did not connect: %v", err)
+		logrus.Fatalf("did not connect: %v", err)
 		return nil, nil, err
 	}
 	c := comment.NewCommentServiceClient(conn)
